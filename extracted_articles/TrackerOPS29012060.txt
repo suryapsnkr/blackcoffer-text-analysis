@@ -1,0 +1,107 @@
+AI-Driven Automated Weekly Newsletter Generator
+
+Client Background
+
+Client: A child-nutrition focused small business Industry Type: Healthcare Products & Services: Child Nutrition, Meal Planning, Health & Wellness Organization Size: 100+
+
+The Problem
+
+Small business CEOs often struggle to stay updated with industry trends, market changes, policy updates, and competitive insights. Doing this manually requires hours of reading, filtering, and cross-checking articles  which is difficult to maintain alongside daily operations.
+
+The client needed a fully automated system that could:
+
+Identify relevant trends for their business Scrape and summarize articles from trusted sources relevant to the trends and their business domain. Remove repeated news already shared in the past Package everything into a clean, CEO-ready weekly email Operate without needing technical expertise This will help the Company Executives to stay up-to-date with the trends and happenings around them related to their business fields as well as the policies and news helping them stay informed and make better business decisions.
+
+Our Solution
+
+We built Trend IQ , a complete no-code/low-code automation pipeline using n8n , Google Sheets, and GPT-4. The system automatically:
+
+Reads the business info from a Google Form Crawls the business website and generates relevant search keywords Fetches and filters news articles from Google News + Google Custom Search Deduplicates previously used links Scrapes full article content and cleans it Generates CEO-friendly summaries using GPT Stores everything neatly in Google Sheets Formats and sends weekly newsletters automatically via Gmail
+
+The entire process runs end-to-end without any manual work .
+
+Solution Architecture
+
+The architecture is split into three automated stages , each handled by a separate n8n workflow:
+
+Stage 0 – Business Intake (Pre-Workflow)
+
+Google Form → Business name, website, industry, frequency Data stored in Google Sheet (Intake Sheet)
+
+Stage 1 – Newsletter Generator
+
+Crawl client website Extract internal pages and clean HTML Use GPT to generate business-aligned keywords Fetch latest articles (last 60–90 days) Apply deduplication against “Used URLs” sheet Decode real article URLs from Google News GUID Scrape and clean article content Create context-aware filtering for duplicates Generate newsletter snippets via GPT Store results in Google Sheets (newsletter sheet)
+
+Stage 2 – Email Formatter & Sender
+
+Read new newsletter items from the Google Sheet Filter only unsent entries Use GPT to convert newsletter text into a polished, HTML CEO email Send email via Gmail OAuth Mark items as “sent” in the sheet
+
+Stage 3 – Scheduler
+
+Weekly cron trigger Calls Stage 1 Waits 2 minutes Calls Stage 2 Completes the weekly digest automation
+
+Deliverables
+
+Fully automated 3-workflow Trend IQ MVP which is robust and scalable Google Form intake setup Structured Google Sheets for data storage Automated website crawling and keyword extraction Automated article scraping & deduplication system GPT-powered summarization pipeline CEO-ready newsletter generator Weekly scheduled delivery via Gmail Documentation + workflow explanation Reusable and scalable pipeline for onboarding more businesses in future
+
+Tech Stack
+
+Tools Used:
+
+n8n (core automation platform) Google Sheets (data storage) Google Forms (intake system) Google News RSS + Google Custom Search API Gmail OAuth (email sending) Jina AI for article extraction OpenAI GPT-4o & GPT-4.1 for summarization & formatting
+
+Language / Techniques Used:
+
+JavaScript (custom Code nodes in n8n) Regex parsing HTML for cleaning & text extraction
+
+Models Used:
+
+GPT-4o (newsletter formatting, keyword extraction) GPT-4.1 (context-aware deduplication summaries)
+
+Skills Used:
+
+Automation design Web scraping logic Prompt engineering Workflow optimization Data parsing & cleansing
+
+Databases Used:
+
+Google Sheets
+
+Web / Cloud Servers Used:
+
+n8n Cloud Execution Google Cloud (Sheets, Forms, Gmail)
+
+What are the technical Challenges Faced during Project Execution:
+
+Google News links aren’t real URLs They come in a GUID encoded format which cannot be scraped directly. Many articles repeat the same information Without context-aware filtering, the CEO would receive duplicated insights. Article scraping is inconsistent across websites Different sites use different HTML structures. Finding a clean way to merge homepage + internal pages for keyword extraction. Handling rate limits for Google Search + GPT calls. Ensuring email formatting remains consistent GPT outputs vary in structure, so stable prompts were needed. Ensuring previously used articles never get reused Required a robust tracking system. Since one part of main focus was also to stay informed on related Government policies, changes and initiatives scraping the Government Website for information was tricky because the website is BOT-protected, preventing homepage extraction, and its internal links only lead to further nested pages instead of direct content.
+
+How the Technical Challenges were Solved
+
+Google News GUID decoding Implemented a multi-step decoding chain using custom n8n Code nodes + POST requests to Google’s hidden endpoint to extract the real article URL. Context-aware deduplication Built a smart 3-month context list that marks articles as:
+
+“actual” (new) “context” (old) GPT then compares new articles with 3-month context to avoid duplicates.
+
+Robust article scraping Used Jina AI + HTML extraction nodes to isolate meaningful content regardless of website structure. Homepage merging Extracted top 5 internal links and merged HTML to build a richer keyword profile. Rate-limit handling Implemented batching, delays, and retry logic on nodes. Stable email formatting Created a strict HTML structure using GPT with fixed rules to prevent variations. Used URL tracking Logged every used link in a dedicated Sheet tab, ensuring no recycled content.
+
+Business Impact
+
+1- 100% automated research workflow : No manual searching, reading, or summarizing.
+
+2- CEO receives a polished weekly briefing: Professionally structured and tailored to their business.
+
+3- Higher decision-making efficiency: Insights are curated, focused, and actionable. 4- Zero repeat articles: Smart deduplication ensures fresh content every week delivering fresh news and content for business owners to move ahead. 5- Scalable system: New businesses can be onboarded simply by submitting a Google Form. 6- Time saved: Estimated 6–8 hours saved per week for senior decision-makers.
+
+Project Snapshots
+
+Workflow 1:
+
+Workflow 2:
+
+Workflow 3:
+
+Google sheet where data is stored:
+
+Final Newsletter :
+
+Project Video:
+
+URL: https://app.screencastify.com/watch/P65xDCnQQK2AQcWAWPAv?checkOrg=417e25bd-dc0b-4f85-a09c-e9e24cf6aef2

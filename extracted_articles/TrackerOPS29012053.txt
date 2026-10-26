@@ -1,0 +1,63 @@
+AI-Powered Inbox Response Classification & Automated Email Engagement Management System
+
+Client Background
+
+Client: A leading fintech firm in the USA Industry Type: Financial Services / Advisory Products & Services: Finance, Data Analytics Organization Size: 100+
+
+The Problem
+
+The client sends large-scale bulk email campaigns to targeted recipient lists. For every ~1000 outbound emails, they expected around 100 responses. Manually reviewing these replies was highly inefficient. The team needed to distinguish between different types of responses, follow-up requests, not interested replies, contact changes, left company, and unsubscribe requests.
+
+They also needed automatic updates to the central contact database whenever a recipient unsubscribed or their contact changed. Finally, the client required the entire inbox automation to be easily turned on or off from their internal application UI.
+
+Our Solution
+
+We built an AI Inbox Manager that automatically monitors incoming emails, classifies the recipient’s response, organizes emails into appropriate folders, and updates contact records in real-time.
+
+The solution integrates AI classification, email webhooks, Supabase database operations, and a user-controlled enable/disable switch built into the main application.
+
+Solution Architecture
+
+Microsoft Graph API webhooks listen for new emails in the client’s mailbox. When an email arrives, a backend service fetches the email content. The email text is sent to OpenAI for classification into categories such as “Not Interested”, “Follow-Up Required”, “Unsubscribe”, or “Contact Change”. Based on the classification, the system: Moves the email to the relevant folder via Graph API Updates Supabase database entries for unsubscribes or invalid contacts A toggle in the main UI updates a Supabase “control” table, which enables or disables the webhook processing logic dynamically. Entire backend is hosted on AWS for reliability and scalability.
+
+Deliverables
+
+Fully functional AI-based inbox classification system Automated folder creation and email organization Real-time unsubscribe/contact-change database updates Supabase-integrated on/off switch for inbox automation Deployed backend service with continuous email monitoring Documentation for workflow and integration
+
+Tech Stack
+
+Tools Used
+
+Microsoft Graph API Supabase API OpenAI API AWS (hosting and deployment)
+
+Language / Techniques Used
+
+Python SQL REST API integration Webhook handling Email parsing and classification workflow
+
+Models Used
+
+OpenAI LLM for email categorization
+
+Skills Used
+
+API integration AI workflow design Database operations Cloud deployment Automation pipeline development
+
+Databases Used
+
+Supabase PostgreSQL
+
+Web / Cloud Servers Used
+
+AWS (EC2 / Lambda / Serverless ,  whichever you used; I can update if needed)
+
+What Were the Technical Challenges Faced During Project Execution
+
+Handling real-time email webhook events reliably Ensuring consistent categorization of varied natural-language email responses Managing folder creation and email movement through Graph API Keeping the system responsive without missing any incoming emails Implementing a user-controlled enable/disable mechanism without affecting processing logic Synchronizing database updates with live inbox events
+
+How the Technical Challenges Were Solved
+
+Configured Microsoft Graph API webhooks with robust retry logic and validation tokens Used OpenAI models to accurately interpret diverse reply formats and ambiguous email language Implemented stable folder management workflows using Graph API endpoints Developed a scalable backend on AWS to ensure low-latency processing Connected the UI toggle to Supabase, converting it into a real-time switch for enabling or disabling webhook processing Added safety checks to prevent duplicate database updates or missed classifications
+
+Business Impact
+
+Eliminated manual email sorting, saving significant team time Ensured every campaign reply is captured, classified, and processed reliably Improved accuracy of contact records (unsubscribes, invalid contacts) Enabled the operations and sales team to focus on meaningful follow-ups instead of sorting emails Enhanced customer management and compliance with unsubscribe requests Provided a scalable system that grows with the client’s campaign volume

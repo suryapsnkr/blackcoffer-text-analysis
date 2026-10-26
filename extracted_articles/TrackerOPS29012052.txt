@@ -1,0 +1,61 @@
+InstarentScraper Pipeline Reliability & Performance Fixes
+
+Client Background
+
+Client: A leading real estate firm in the usa Industry Type: Real Estate Technology / Web Scraping / Data Delivery Products & Services: Automated rental listing aggregation, user-specific filtering, and real-time notification service. Organization Size: 100+
+
+The Problem
+
+The InstaRentScraper pipeline, designed to aggregate rental listings from Dutch real estate sites and deliver filtered results to users, faced critical reliability and data flow issues . The problems spanned three key areas:
+
+Scraper Reliability: The pararius_scraper and huurwoningen_scraper were failing due to a Brotli decompression error and HTML parsing errors (NoneType object has no attribute ‘contents’), leading to intermittent or complete failure in collecting data. Redis Timeout: The database operations for caching apartments were encountering Redis Timeout errors , compromising data persistence and speed. Data Flow Blockage (Supabase Client Misuse): The core service, user_filtering, which populates the essential user_apartments table, was blocked. This was due to an incorrect usage of the synchronous Supabase Python client within an await expression across three different modules (filter.py, user.py, and user_apartments.py). Despite successful scraping of new apartments into the main table and local email functionality, the system failed to consistently link new listings to user profiles.
+
+Our Solution
+
+We conducted a comprehensive two-phase diagnostic and resolution project to restore the InstaRentScraper’s end-to-end functionality and reliability .
+
+Scraper and Database Fixes (Phase 1): Brotli Fix: Removed manual Brotli handling and relied on httpx’s automatic decompression. Parsing Fixes: Corrected HTML class names and added robust error handling to skip missing elements during scraping. Redis Fix: Updated db_connection.py to use redis.asyncio with explicit timeouts and added retry logic to database calls (rb.get and rb.set). Pipeline Flow Fixes (Phase 2): Supabase Client Correction: The critical issue of incorrectly awaiting a synchronous APIResponse object was fixed across filters.py, user.py, and user_apartments.py. The synchronous Supabase calls were corrected to use appropriate return logic and simplify error handling.
+
+The fixes resulted in a fully restored pipeline , allowing the user_apartments table to consistently update, reflecting the insertion of 1,464 new records across 13 users in a single run.
+
+Solution Architecture
+
+The troubleshooting and fixing focused on three layers of the existing pipeline architecture:
+
+Scraping Layer: Utilized Python/httpx for fetching data from external sites (Pararius, Huurwoningen). Fixes were implemented in core/engine.py and the scraper files to ensure reliable data acquisition Data Storage Layer: Managed by Redis (for caching) and Supabase (for persistence). Fixes were implemented in db/db_connection.py and db/models/apartment.py to handle timeouts and reliable connection using redis.asyncio Filtering & Notification Layer ( user_filtering ): This is the core service that processes the data. It uses the Supabase Python Client to fetch user filters, retrieve user profiles, and insert matched apartments. The fix involved correcting the asynchronous usage of the synchronous Supabase client to ensure the data flow was uninterrupted
+
+Deliverables
+
+Restored Scraper Modules: pararius_scraper.py and huurwoningen_scraper.py are now operational and stable.
+
+Database Reliability: Fixed Redis Timeout errors through asynchronous handling and retry logic.
+
+Fully Functional Pipeline: The user_filtering service is now correctly inserting records into the user_apartments table, growing the table from 63,248 to 64,712 records in one test run.
+
+Cleaned Codebase: Supabase client misuse was resolved in three files (filters.py, user.py, and user_apartments.py), improving code clarity and removing false error logs.
+
+Verification Logs: Detailed logs confirming the full cycle: filter fetch, apartment filtering, email sending, and successful record insertion.
+
+Tech Stack
+
+Tools used Python, httpx, Supabase Python Client, Redis, Docker, Jupyter Notebooks. Language/techniques used Asynchronous Python (async/await), HTML Parsing (implied by content fixes) , HTTP/2 , Async Redis, Supabase API interaction. Models used N/A (Web Scraper and Data Pipeline Troubleshooting) Skills used Debugging Asynchronous Python, Troubleshooting Distributed Systems (Docker/Redis), Web Scraper Fixes (Brotli/Parsing), Supabase API Integration, Database connection management. Databases used Supabase (Postgres), Redis (Caching). Web Cloud Servers used N/A (Uses Supabase for backend, data source is external websites).
+
+What are the technical Challenges Faced during Project Execution
+
+The most complex challenge was debugging the Supabase client misuse error . This error (object APIResponse[~_ReturnT] can’t be used in ‘await’ expression) manifested in three different critical locations of the user_filtering service. Fixing one instance only revealed the next, indicating a fundamental misunderstanding of the client’s synchronous nature within an asynchronous Python environment, which completely blocked the core data flow.
+
+Secondary challenges included:
+
+Resolving the Brotli decompression failure in the scraper, which required correctly configuring httpx to handle HTTP/2 and compression headers. Addressing Redis timeouts in the database layer, necessitating the shift to asynchronous Redis handling and adding retry logic.
+
+How the Technical Challenges were Solved
+
+The core Supabase client misuse was solved by recognizing that the Supabase Python Client is synchronous and should not be used with await when fetching data.
+
+In filters.py and user.py, the await was removed from the .execute() calls, and the code was updated to properly extract the response.data. This restored the retrieval of filters and user profiles. For the Brotli and Scraper Fixes , the core/engine.py was modified to remove manual decompression and configure httpx with the correct accept-encoding headers. HTML parsing logic was updated with the correct class names to prevent NoneType errors. The Redis Timeout was resolved by switching the database connection to use redis.asyncio and implementing retry logic for database operations (rb.get and rb.set).
+
+Business Impact
+
+The successful fixes dramatically improved the platform’s reliability and its ability to deliver value to end-users:
+
+Restored Service Delivery: The user_filtering service is now consistently populating the user_apartments table, which is the cornerstone of the platform’s user-facing value proposition. Improved Data Acquisition: Reliable and robust scrapers mean a steady, consistent flow of new rental listings into the platform’s core database. Enhanced User Experience: By ensuring new apartments are correctly matched and inserted, users now receive timely and accurate email notifications of relevant new listings (e.g., 42 new apartments sent to one user in a single run). Reduced Operational Confusion: The elimination of false error logs in user_apartments.py and the removal of scraper errors reduces time spent on operational maintenance and debugging.

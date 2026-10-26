@@ -1,0 +1,71 @@
+Reliable Event Detection & Alerting System via YOLOv8
+
+Client Background
+
+Client: A leading tech security firm in Israel
+
+Industry Type: Security Cameras
+
+Products & Services: Sparrow AI
+
+Organization Size: 200+
+
+The Problem
+
+The existing system relied on an outdated YOLO model that failed to detect all relevant objects accurately. Detection struggles led to missed events, unreliable alerts, and decreased customer confidence.
+
+Our Solution
+
+Leveraging expertise in computer vision and AI, we designed a robust solution architecture:
+
+• Upgraded to YOLO v8: Migrated from the legacy YOLO version to the latest YOLO v8 model for state-of-the-art object detection.
+
+• Tools Used: Employed leading computer vision (CV) libraries and frameworks.
+
+• Programming Language: Python, enabling rapid prototyping and seamless deployment.
+
+• Database: SQL databases for structured storage of detection outputs and system logs.
+
+Solution Architecture
+
+Integrated YOLO v8 model into the Sparrow AI pipeline –
+
+• Utilized CV libraries for real-time image/frame processing and pre/post-processing.
+
+• Developed custom scripts for model training, tuning, and inference deployment.
+
+• Automated results logging into SQL databases, enabling analytics and review.
+
+• Modular design for easy future upgrades and scalable processing.
+
+Deliverables
+
+Update working YOLO model.
+
+Tech Stack
+
+Tools used Cv libraries. Language/techniques used Python Models used YOLO v8 Skills used Computer Vision Databases used SQL
+
+What are the technical Challenges Faced during Project Execution
+
+Detection struggles led to missed events, unreliable alerts, and decreased customer confidence.
+
+How the Technical Challenges were Solved
+
+• Legacy Model Limitations: The earlier YOLO model had low detection accuracy on complex scenes.
+
+• Compatibility: Ensuring new YOLO v8 model integrates seamlessly with existing systems.
+
+• Performance: Real-time inference speed and system resource constraints.
+
+Business Impact
+
+• Deliverable: Fully functional YOLO v8 model deployed and operational.
+
+• Detection Accuracy: Marked improvement in object detection rates, reducing missed events and false negatives.
+
+• Operational Confidence: Enhanced reliability led to better security outcomes and increased customer satisfaction.
+
+• Scalability: Modular architecture allows for future model upgrades and expansion to new camera streams.
+
+• Efficiency Gains: Streamlined data flows and automated processes enabled rapid deployment and analytics.

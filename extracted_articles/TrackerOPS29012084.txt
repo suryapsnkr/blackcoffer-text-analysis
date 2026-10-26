@@ -1,0 +1,59 @@
+AI Chatbot with Cursor AI
+
+The AI chatbot is a single-page web application that allows users to send messages and receive simulated AI responses. The application is built with modern web technologies to ensure scalability, type safety, and maintainability. It uses Vite as the build tool for fast development and production builds, React 19 for the frontend, TypeScript for type safety, Tailwind CSS for styling, and ESLint with TypeScript ESLint for code quality.
+
+GitHub Repository: https://github.com/PijushPathak07/ChatBot-Using-CursorAI
+
+Solution Overview
+
+Prerequisites
+
+Node.js : Version 18 or higher (download from nodejs.org ). Cursor AI : Free version (download from cursor.com ). Git : For version control (optional, download from git-scm.com ). A modern browser (e.g., Chrome, Firefox) for testing.
+
+Architecture:
+
+TypeScript Integration: Strong typing for better code quality and developer experience Component-Based Architecture: Reusable React components CSS-in-JS with Tailwind: Utility-first CSS framework for rapid UI development ESLint Configuration: Enforced code quality standards Vite Build System: Fast development and optimized production builds
+
+Architecture Diagram
+
+Setup Instruction:
+
+Step 1: Set Up Your Environment
+
+Download Cursor AI :
+
+Visit Cursor’s official website . Download the free version for your operating system (Windows, macOS, or Linux)
+
+Step 2: Create a New Project in Cursor AI
+
+Open Cursor AI and create a new project folder: Press Ctrl/Cmd + T to open the file explorer. Select “New Folder” and name it demo-ai-chatbot. Inside the folder, create a new file named index.html.
+
+Step 3: Use Cursor AI’s Composer to Generate and Enhance Code
+
+Open Composer :
+
+Select index.html in Cursor AI. Press Ctrl/Cmd + I to open the Composer tool.
+
+Generate Initial Code (Optional) :
+
+If you want to practice generating code, delete the contents of index.html and type a prompt in Composer:
+
+Create a simple chatbot interface in React with Tailwind CSS. Include an input field, a send button, and a chat history display. The chatbot should echo user messages as a simulated AI response.
+
+Composer will generate code similar to the artifact. Paste it into index.html.
+
+Add the Clear Chat Feature :
+
+To add the “Clear Chat” button (already included in the artifact), use Composer: Highlight the React component code. In Composer, type:
+
+Add a button below the input field to clear the chat history.
+
+Enhance the AI Response :
+
+The current code echoes the user’s input. To make it more realistic, use Composer to add a delay: Highlight the handleSend function. In Composer, type:
+
+Add a 500ms delay to the AI response to simulate processing time.
+
+Step 4: Debug and Test the Project
+
+Preview the Application : In Cursor AI, right-click index.html and select “Open with Live Server” (if available) or open the file directly in a browser by double-clicking it in your file explorer. Alternatively, drag and drop index.html into a browser window. Test Functionality : Type a message (e.g., “Hello”) in the input field and click “Send” or press Enter. Verify that the message appears in the chat history (blue bubble, right-aligned). Check that the AI responds after a 500ms delay with “Echo: Hello” (green bubble, left-aligned). Click “Clear Chat” to ensure the chat history resets. Debug with AI Chat : If you encounter issues (e.g., the send button doesn’t work), use Cursor AI’s AI chat panel: Press Ctrl/Cmd + Shift + I to open the chat panel. Type: “Why isn’t my send button working in my React chatbot?” The AI may suggest checking the onClick handler or ensuring input.trim() isn’t blocking empty inputs. Apply any suggested fixes and retest.

@@ -1,0 +1,95 @@
+Automated ROAS & Ad Performance Dashboard Across Global Ad Platforms
+
+Client Background
+
+Client: A leading ad tech firm in India Industry Type: Digital Advertisements Products & Services: Monetized websites running ads through global platforms like Google AdX, AdSense, and Ezoic Organization Size: 70+
+
+The Problem
+
+The client ran multiple monetized platforms and global ad campaigns through Google AdX, AdSense, and Ezoic. Each platform had its own reporting tools, fragmented across different websites and campaigns.
+
+Calculating Return on Ad Spend (ROAS) and other performance metrics required heavy manual work, involving logins to multiple dashboards, data downloads, and tedious aggregation. This created:
+
+High operational overhead Delayed reporting Inconsistent tracking of performance metrics No unified or real-time view of global ad performance
+
+Our Solution
+
+We engineered an automated and centralized ad performance tracking system that included:
+
+API Integration : Established authenticated access to Google AdX, AdSense, Ezoic, and Google Ads APIs. ETL Pipeline : Built a Python-based ETL pipeline that fetched, normalized, and loaded ad campaign data into a PostgreSQL database. Scheduled Updates : Enabled automated data refresh every 6 hours to ensure near real-time insights. Deployment : Dockerized the entire ETL solution and deployed it on a DigitalOcean droplet. Monitoring and Alerts : Integrated Slack notifications for ETL job status (success/failure) along with in-depth logging and error handling.
+
+Solution Architecture
+
+ Data Sources : Google AdX, Google AdSense, Google Ads API, Ezoic
+
+ ETL Engine : Custom Python ETL tool
+
+ Database Layer : PostgreSQL on DigitalOcean
+
+ Scheduler : Cron inside Docker container for timed runs
+
+ Deployment Infrastructure : DigitalOcean droplet running Docker
+
+ Monitoring & Alerts : Slack integration with job status logging and error alerts
+
+Deliverables
+
+  API integrations with Google AdX, AdSense, Ezoic, and Google Ads
+
+  Python-based ETL pipeline to ingest ad campaign performance metrics
+
+  Normalized PostgreSQL database schema for unified data structure
+
+  Scheduled data updates (6-hour intervals)
+
+  Dockerized deployment on DigitalOcean
+
+  Slack alerts for operational transparency and failure detection
+
+Tech Stack
+
+Tools used
+
+DigitalOcean, Docker, Slack, Postman
+
+Language/techniques used
+
+Python, REST APIs, ETL orchestration, Cron scheduling
+
+Models used N/A Skills used API integration, ETL development, Dockerization, Monitoring, AdTech Analytics Databases used PostgreSQL Web Cloud Servers used DigitalOcean (Droplet hosting ETL and DB)
+
+What are the technical Challenges Faced during Project Execution
+
+  Navigating different authentication mechanisms and response formats of multiple ad platforms
+
+  Unifying disparate metrics from different platforms into a single data model
+
+  Ensuring consistency and freshness across time zones and scheduling conflicts
+
+  Implementing monitoring and fault tolerance in long-running ETL jobs
+
+How the Technical Challenges were Solved
+
+  Developed a standardized API wrapper layer in Python for all platforms
+
+  Mapped each platform’s metrics to a common schema for unified reporting
+
+  Used Docker + Cron to schedule updates without OS-level dependency
+
+  Built Slack-based logging with detailed job tracking and real-time alerts for transparency
+
+  Introduced robust error handling and retry mechanisms within the ETL pipeline
+
+Business Impact
+
+  95% reduction in manual time spent on aggregating ROAS and ad performance
+
+  Daily operational efficiency and faster decision-making from fresh, centralized data
+
+  Scalable ETL setup that can incorporate new ad platforms in the future
+
+  Increased data accuracy and stakeholder confidence in marketing KPIs
+
+Project Snapshots
+
+Backend System/Confidential code

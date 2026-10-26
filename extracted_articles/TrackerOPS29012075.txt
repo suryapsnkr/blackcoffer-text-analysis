@@ -1,0 +1,83 @@
+Building a Complete SWMS Management Platform with Dynamic Workflows, PDF Automation, and Full-Stack Stability
+
+Client Background
+
+Client: A leading tech firm in Australia
+
+Industry Type: IT & Consulting
+
+Products & Services: IT & Cyber Security
+
+Organization Size: 100+
+
+About the Client: The client is a safety and compliance service provider responsible for creating, managing, and delivering Safe Work Method Statements (SWMS) for various industrial and field operations. Their workflows require quick document creation, dynamic activity and risk assessment generation, and seamless collaboration across roles and qualifications. With growing operational demands, they needed a robust, responsive, and automated platform that ensures accuracy, fast updates, and professional PDF outputs—while remaining easy to host and manage on their existing GoDaddy VPS environment.
+
+The Problem:
+
+The client needed a complete Safe Work Method Statements (SWMS) Management Tool — a responsive web app that allows:
+
+Uploading and editing documents Dynamic activity and risk control generation Instant color-coded backgrounds Role and qualification mapping Easy server hosting on GoDaddy VPS
+
+Challenges:
+
+No server environment prepared Incomplete backend structure Unstable frontend (resizing, markups, immediate data reflection) Need for dynamic PDF downloads, logo uploads, and quick GPT-based responses Tight deadlines and full technical ownership expected
+
+Our Solution:
+
+We proposed a full-stack development solution focused on: Fully customized Vue.js frontend based on Vue-Fabric-Editor .
+
+Python FastAPI backend with smart APIs for document generation. VPS Setup on GoDaddy with hardened security. Added features like dynamic logo update, PDF generation, live background coloring, and live API integration. Smooth local-to-production deployment guide for client handover.
+
+Solution Architecture:
+
+Users (Frontend)
+
+↓
+
+Vue.js + Vue-Fabric-Editor (Reactively handles UI/UX, Canvas Markups)
+
+↓
+
+FastAPI (Python Backend, APIs for Login, Signup, Payments, Document CRUD)
+
+↓
+
+PostgreSQL / File Storage (for storing user documents and data)
+
+↓
+
+GoDaddy VPS (Ubuntu, Nginx, Gunicorn/uvicorn server hosting)
+
+Deliverables:
+
+Fully deployed and secured Photo Markup & SWMS Management web application
+
+Backend APIs for High Risk Activities, PPEs, Roles & Responsibilities, Permits, Legislations, Plants & Equipments Dynamic local server setup instructions Server secured with SSL certificates Color-coded dynamic tables based on GPT analysis Local file saving for resized cells and custom logo uploads Documentation and training handover
+
+Tech-Stack Used:
+
+Layer Technology Frontend Vue.js, Vue-Fabric-Editor, JavaScript Backend Python 3, FastAPI Database/File Storage PostgreSQL, JSON Files Deployment VPS (GoDaddy), Nginx, Gunicorn, Uvicorn Tools GitHub, Stripe (for future payments), AJAX, Fabric.js
+
+Technical Problems Faced:
+
+Application Compatibility: Application was not fully production-ready; lacked import stability for large image files. Backend Inconsistencies: FastAPI backend had API gaps and inconsistent authentication logic. Performance Problems: Frontend markup lagged for larger images. Security Concerns: Initial server setup was vulnerable (open ports, no SSL). Outdated VPS environment (no Python3.11, no NodeJS)
+
+Vue-Fabric-Editor did not handle large dynamic drawings properly Python APIs lacked proper real-time interactivity Background color changes required full page refresh initially Dynamic resizing of cells not saving across sessions No built-in feature to upload/change logo Scrollbars ruining UI/UX on expanding cells APIs not optimized for minimal GPT calls
+
+How Technical Problems Were Solved:
+
+Manually upgraded server libraries; built virtual environments
+
+Forked Vue-Fabric-Editor and added image compression, dynamic loading improvements Wrote custom FastAPI endpoints for dynamic AJAX interaction Used event listeners + AJAX polling to fetch and update background colors instantly Saved resizable cell dimensions into tableCell.json Added file upload APIs ( /changeLogo ) to support live logo changes Adjusted textarea CSS to auto-expand without scrollbars Optimized API prompts to return minimal clean data (improved API speed)
+
+Backend API Improvements: Built missing authentication flows using JWT, added error handling for better reliability. Performance Enhancements: Optimized frontend rendering by reducing Fabric.js rendering cycles and limiting unnecessary state updates. Server Security Hardening: Installed SSL certificates using Let’s Encrypt, set up firewalls, and disabled unused ports to prevent unauthorized access.
+
+Business Impact:
+
+Fast Go-to-Market: The VPS deployment allowed the client to launch the platform faster without waiting for costly infrastructure setups.
+
+Enhanced User Experience: Users could easily upload and mark up photos — improving usability and customer satisfaction. Lower Operational Costs: Using open-source tools (Vue-Fabric-Editor, FastAPI) and self-managed VPS saved recurring cloud expenses. Scalability Ready: The deployed solution was modular, meaning new features (like different markup templates or collaborative editing) could be added easily. Increased Engagement: A more beautiful, responsive photo markup tool led to higher usage rates among early adopters. Custom branding with logo upload feature added Higher user satisfaction by removing annoying page refreshes
+
+Contact Details
+
+This solution was designed and developed by Blackcoffer Team Here are my contact details: Firm Name: Blackcoffer Pvt. Ltd. Firm Website: www.blackcoffer.com Firm Address: 4/2, E-Extension, Shaym Vihar Phase 1, New Delhi 110043 Email: ajay@blackcoffer.com WhatsApp: +91 9717367468 Telegram: @asbidyarthy

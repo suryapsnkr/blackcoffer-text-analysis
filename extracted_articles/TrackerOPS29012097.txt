@@ -1,0 +1,67 @@
+Transforming Real Estate Investments with an Automated Stack shares Platform
+
+Client Background
+
+Our client is a major real estate investment group in the United States, overseeing a diverse portfolio of properties and seeking robust methods to manage deals, investor relations, and equity waterfall calculations.
+
+Project Objective
+
+Automate Equity Waterfall Calculations : Build a reliable tool capable of handling multi-tier equity distributions for various real estate deals, accurately reflecting client-specific CSV data. Streamlined User Roles: Provide distinct portals for three types of users — Admin, Sponsor, and Investor — each with its own interface and access privileges. End-to-End Deal Management: Enable creation, subscription, and monitoring of real estate deals from inception to distribution. Integration & Scalability: Deploy on Google Cloud App Engine for high availability and easy scaling.
+
+Project Description
+
+We built https://www.stackshares.io with a modern, microservices-inspired approach. Here’s a quick rundown of the tech stack:
+
+We kicked off the development by choosing Python and Django REST for the backend logic, ReactJS for the frontend, and SQLite for simplicity in database operations. The codebase is deployed to Google Cloud App Engine for easy scalability and minimal downtime.
+
+Core Requirements
+
+A comprehensive software that calculates equity waterfalls based on a client-provided CSV. Three different user portals: Admin, Sponsor, Investor. Sponsors create deals and invite Investors. Investors can subscribe to deals, pending Sponsor approval.
+
+Project Execution
+
+Multiple Calculation Cases Each CSV file can define a unique scenario for equity distribution. We implemented two cases initially; more can be added as the client provides new CSV templates . Accurate Matching of CSV Outputs Python logic in Django REST ensures the results match the CSV figures exactly. Granular Permissions Admin sees everything; Sponsor sees only their own deals; Investors see only invited deals.
+
+Our Solution
+
+We have created api’s that will calculate the equity waterfall calculation according to the selection of the waterfall tiers.
+
+Project Deliverables
+
+Django rest framework api’s with frontend. Github source code. Working UI.
+
+Tools used
+
+Views. Routers. Serializers. Serializer relations.
+
+Language/techniques used
+
+Python Django rest framework NextJS JWT SMTP
+
+Databases used
+
+Sqlite3 Database
+
+Web Cloud Servers used
+
+Google cloud platform
+
+GitHub Project URL
+
+All the code is saved to github in master branch you can clone the branch and here is the URL link – https://github.com/AjayBidyarthy/Joel-Weinberger-Equity-Waterfall-Software-Backend/tree/master
+
+Major Task Details for the Project
+
+Investment Metrics & Calculation We introduced a dedicated Investment Metrics section in the UI, allowing Sponsors and Investors to input key financial figures (e.g., initial investment, target IRR, preferred returns). These metrics are then seamlessly passed to the backend via Django REST APIs, where our Python-based logic calculates real-time updates. This approach reduces manual entry mistakes and enforces data consistency across all deal calculations. Automated Waterfall Calculator A dynamic Calculator was developed to generate waterfall distributions by combining Investment Metrics, Investment Terms, and Projected Returns. Technical Highlight: We leveraged Django’s built-in model relationships and conditional logic to parse multiple CSV data points. These are then used to compute each hurdle tier (Preferred Return, Catch-Up, etc.) in a modular way, making the system easy to extend for future variations of waterfall structures. Sharable Calculator & Collaboration We created a “Share” feature for the Waterfall Calculator so users can generate unique links for real-time collaboration. When a user shares their link, it embeds a unique token referencing the calculation state stored in the database. Why It’s Scalable: Instead of duplicating data or emailing static spreadsheets, each collaborator references the same data source. This fosters teamwork and ensures everyone sees the exact same distribution details. 3D Capital Stack Visualization A new 3D visual layout was integrated into the platform to illustrate the Capital Stack layers (Equity, Debt, Mezzanine, etc.). Technical Implementation: Using a lightweight 3D rendering library alongside React, we convert back-end data (capital structure percentages, classes, and priorities) into interactive visual blocks. This graphical approach gives both Sponsors and Investors a clearer picture of how different classes of investment stack up. Cash Flow Table for Improved Accuracy To ensure full transparency, we added a Cash Flow Table into the application interface. It breaks down cash inflows/outflows year-by-year (or month-by-month, based on the CSV input), making it easier to reconcile actual returns with projected distributions. Technical Note: The Cash Flow Table is generated from aggregated backend calculations, using Django’s QuerySets to slice data by date range. React’s data grid components display the results in a user-friendly format. Storing and Sharing Deals Deals can now be saved to the backend, versioned, and re-shared anytime. This lets Sponsors easily update deals, invite new investors, or revert to previous versions if needed. Technical Detail: We use Django’s ModelSerializer to validate incoming deal updates. A robust permission system ensures only the deal owner or Admin can modify certain fields. Final Result Distribution for Waterfall After processing all tiers, the system generates a consolidated Final Distribution summary, detailing each investor’s share of profits. Implementation: We rely on Python’s built-in decimal module for precise financial calculations (avoiding floating-point inaccuracies). The result is displayed on the front end through a React component that updates automatically whenever new data is saved or updated. Full CRUD for Deals (Create, Read, Update, Delete) We built a complete API layer for creating, updating, and deleting deals, each action tracked in the SQLite database. RESTful Endpoints: Django’s REST framework ViewSets and Router classes handle user requests, while JWT tokens authenticate users to ensure they can only access or modify deals they own or are invited to.
+
+Why These Enhancements Matter
+
+Increased Reliability: By centralizing deal data on the backend, we reduce the risk of human error. Improved Scalability: The shareable calculators and 3D visualizations make it easy for larger teams to collaborate without overwriting each other’s data. Better Decision-Making: Comprehensive tables and real-time waterfalls give stakeholders a clear, data-driven understanding of each investment’s performance.
+
+What are the technical Challenges Faced during Project Execution
+
+The technical issues faced during the project is how to calculate the equity waterfall calculation for different tiers and different cases. And also invite the sponsors by admin or sponsors invite their investors.
+
+Conclusion
+
+We’ve built a flexible, role-based platform on Google Cloud that automates complex waterfall distributions and simplifies real estate deal management. If you need more customization—like additional CSV calculation cases or new user features—we can easily integrate them thanks to our modular Django REST framework and ReactJS /Next Js frontend.

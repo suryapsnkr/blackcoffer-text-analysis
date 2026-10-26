@@ -1,0 +1,99 @@
+Google Kubernetes Engine
+
+Client Background
+
+Client:  A leading tech firm in the USA
+
+Industry Type: IT
+
+Products & Services: SaaS Development and IT Services
+
+Organization Size: 200+
+
+The Problem
+
+The client was facing high costs running multiple microservices on Google Cloud Run. They also needed more control over infrastructure, especially to support the growing needs of their Machine Learning team, who required closer collaboration with a Kubernetes expert for deploying and managing ML workloads efficiently.
+
+Our Solution
+
+We migrated all services from Cloud Run to Google Kubernetes Engine (GKE) to reduce costs and provide better scalability and control. A dedicated GKE engineer worked closely with the ML team to help containerize and manage their workloads. The new GKE setup offered cost efficiency, secure secrets management, and environment-specific deployments for dev, staging, test, and production.
+
+Deliverables
+
+Migration of All Services from Cloud Run to GKE
+
+Bluebird-dev, staging, test, and prod environments migrated to GKE
+
+Kubernetes Deployment Manifests
+
+YAML files for all services with environment-specific configurations
+
+Secrets Management Setup
+
+Kubernetes Secrets and ConfigMaps for secure handling of environment variables
+
+Integration Support for ML Team
+
+GKE support for containerized ML workloads and infrastructure guidance
+
+Environment-Specific Cluster Setup
+
+Separate namespaces and configurations for dev, staging, test, and prod
+
+Cloud Function Connectivity Configuration
+
+Configured internal access from K8s services to Cloud Functions
+
+GitHub Repository Updates
+
+Updated code with K8s manifests and README for all environment
+
+Testing and Validation
+
+Functional testing in all environments with team collaboration.
+
+Tech Stack
+
+Google Kubernetes Engine (GKE) Docker Google Artifact Registry
+
+Google Cloud Functions GitHub Google VPC, IAM, Secrets Manager
+
+What are the technical Challenges Faced during Project Execution
+
+Managing secrets securely across different GKE environments Ensuring seamless integration between Cloud Functions and GKE services Synchronization and communication between different development teams
+
+How the Technical Challenges were Solved
+
+Used native Kubernetes Secrets and kubectl commands for secure, simple deployments. Enabled Cloud Function access by configuring internal networking and IAM. Worked closely with the ML team to support containerization and GKE deployment. Maintained consistent setups across all environments using standard K8s practices.
+
+Business Impact
+
+Reduced Infrastructure Costs by moving from Cloud Run to GKE with optimized resource usage. Improved Deployment Consistency across dev, staging, test, and prod environments. Streamlined Collaboration between DevOps and ML teams, accelerating ML deployment. Faster Rollouts & Updates using version-controlled K8s deployments. Enhanced Security with centralized secret management and controlled access.
+
+Project Snapshots:
+
+Home Page:
+
+Explore Page:
+
+Notifications Page:
+
+Messages Page:
+
+Lists Page:
+
+Profile Page:
+
+Project website url:
+
+Test Application URL: https://test.opbluebird.com/
+
+The test application hosted on the testing cluster showcases the core features of the Bluebird platform, including user profiles, notifications, messaging, and list management. It serves as a pre-production environment for validating functionality and user experience.
+
+Project Video
+
+Watch the project walkthrough here: https://www.loom.com/share/c0521206c822427fa3b48684efb20a6e?sid=ceef660c-43ff-4243-ae8c-f6eb9f138bba
+
+Contact Details
+
+This solution was designed and developed by Blackcoffer Team Here are my contact details: Firm Name: Blackcoffer Pvt. Ltd. Firm Website: www.blackcoffer.com Firm Address: 4/2, E-Extension, Shaym Vihar Phase 1, New Delhi 110043 Email: ajay@blackcoffer.com WhatsApp: +91 9717367468 Telegram: @asbidyarthy

@@ -1,0 +1,41 @@
+Working with MCP
+
+General architecture
+
+At its core, MCP follows a client-server architecture where a host application can connect to multiple servers:
+
+MCP Hosts : Programs like Claude Desktop, IDEs, or AI tools that want to access data through MCP MCP Clients : Protocol clients that maintain 1:1 connections with servers MCP Servers : Lightweight programs that each expose specific capabilities through the standardized Model Context Protocol Local Data Sources: Your computer’s files, databases, and services that MCP servers can securely access Remote Services : External systems available over the internet (e.g., through APIs) that MCP servers can connect to
+
+Introduction
+
+MCP is an open protocol that standardizes how applications provide context to LLMs. Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect your devices to various peripherals and accessories, MCP provides a standardized way to connect AI models to different data sources and tools.
+
+Why MCP?
+
+MCP helps you build agents and complex workflows on top of LLMs. LLMs frequently need to integrate with data and tools, and MCP provides:
+
+A growing list of pre-built integrations that your LLM can directly plug into The flexibility to switch between LLM providers and vendors Best practices for securing your data within your infrastructure
+
+Core MCP Concepts
+
+MCP servers can provide three main types of capabilities:
+
+Resources: File-like data that can be read by clients (like API responses or file contents) Tools: Functions that can be called by the LLM (with user approval) Prompts: Pre-written templates that help users accomplish specific tasks
+
+System requirements
+
+Python 3.10 or higher installed. You must use the Python MCP SDK 1.2.0 or higher.
+
+FastMCP: Building MCP Servers and Clients
+
+FastMCP is a Pythonic framework designed to simplify the creation of MCP servers and clients. It handles the underlying complexities of the protocol, allowing developers to focus on defining tools, data resources, and interaction patterns they want to expose to LLMs.
+
+MCP Server
+
+Definition : Hosts callable tools and data sources. Built With : fastmcp (a FastAPI-compatible library). Main Components : Tools – Functions that LLMs can call. Resources – Read-only data (e.g., APIs). Prompts – Predefined prompt formats (optional).
+
+Startup : Usually run using: uv run mcp dev server/weather.py
+
+MCP Client
+
+Definition : A wrapper that connects to one or more MCP Servers, exposes tools, and helps the LLM understand how to use them. Implemented With : modelcontextprotocol SDK or via LangChain MCP client wrappers. Workflow : Load a config .json file with tool URLs. Initialize with MCPClient.from_config_file(“path/to/config.json”). Pass it into an MCP-aware agent (like MCPAgent) along with your LLM.

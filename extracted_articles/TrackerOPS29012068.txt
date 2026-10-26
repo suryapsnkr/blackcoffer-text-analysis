@@ -1,0 +1,55 @@
+Smart Food Ordering with BlandAI: Transforming Through Voice AI
+
+Client Background
+
+Client: A leading foodtech firm in India
+
+Industry Type: eCommerce
+
+Products & Services: FoodTech
+
+Organization Size: 100+
+
+About the Client: Grubb is a modern food and restaurant delivery platform focused on delivering seamless, convenient, and inclusive ordering experiences for its users. Serving a diverse customer base, the company aims to simplify food discovery, ordering, and table reservations through innovative digital solutions. With a strong emphasis on accessibility and user engagement, Grubb continuously adopts emerging technologies to improve interaction channels, enhance customer satisfaction, and create a more intuitive, hands-free ordering ecosystem.
+
+The Problem
+
+Grubb, a food and restaurant delivery platform, sought to enhance user engagement and streamline the ordering process. However, manual interactions and reliance on app-based UI posed accessibility challenges for certain users and slowed down the ordering experience. The lack of voice-driven automation also limited the convenience and inclusivity of the platform.
+
+Our Solution
+
+To address these limitations, we integrated BlandAI—a conversational AI platform that communicates via voice calls—into the Grubb ecosystem. This solution enables users to interact with Grubb through natural voice conversations, allowing them to search for restaurants, order food or groceries, and book tables hands-free.
+
+Solution Architecture
+
+Voice Assistant Integration: BlandAI serves as the voice interface that interacts with users via phone calls. API Layer: FastAPI-based backend exposes endpoints for item listings, restaurant search, user details, and order calculation. Database: Firebase Firestore stores vendor, product, and user information. Deployment: APIs are hosted on an EC2 instance with HTTPS enabled via NGINX and Certbot. Conversational Pathways: Custom-built flows for food ordering, grocery ordering, and table reservations.
+
+Deliverables
+
+4 Functional APIs: Item List API Restaurant List API User Details API Order Calculation API Conversational flow design for BlandAI EC2-hosted and secured API infrastructure Integration of BlandAI voice interface with backend APIs
+
+Tech Stack
+
+Tools used Amazon EC2 Firebase Firestore NGINX Certbot GitHub VS Code
+
+Language/techniques used Python (FastAPI framework) Firebase Admin SDK Geopy (for geolocation calculations) Uvicorn (ASGI server) Skills used API development Cloud infrastructure setup Voice AI integration Real-time data querying Secure deployment
+
+What are the technical Challenges Faced during Project Execution
+
+HTTPS Integration: Initially, the EC2 instance lacked HTTPS support, making it incompatible with BlandAI’s requirements. API Communication Errors: Mismatched request formats between BlandAI and FastAPI caused integration issues. Excessive Output from APIs: Restaurant and item listing APIs returned too much data, overwhelming users.
+
+How the Technical Challenges were Solved
+
+HTTPS Integration: Installed and configured NGINX and Certbot on the EC2 instance to enable secure API access. API Communication Errors: Standardized input and output formats, added validation checks, and tested endpoint compatibility with BlandAI. Excessive Output from APIs: Began implementing response filters and relevance ranking to limit and prioritize results for better user experience.
+
+Project Snapshots
+
+Project website url
+
+<Start writing from here>
+
+Project Video
+
+Contact Details
+
+This solution was designed and developed by Blackcoffer Team Here are my contact details: Firm Name: Blackcoffer Pvt. Ltd. Firm Website: www.blackcoffer.com Firm Address: 4/2, E-Extension, Shaym Vihar Phase 1, New Delhi 110043 Email: ajay@blackcoffer.com WhatsApp: +91 9717367468 Telegram: @asbidyarthy

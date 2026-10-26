@@ -1,0 +1,45 @@
+Transforming Commercial Insurance with Intelligent Policy Analysis
+
+Client Background
+
+Client: A leading Insurance & Tech firm in USA Industry Type: Insurance and Compliance Products & Services: Insurance Broker Organization Size: 200+
+
+The Problem
+
+Most companies need insurance but don’t know exactly what kind or how much. So they hire commercial insurance brokers to help. These brokers spend about 80% of their time on manual, repetitive tasks like reviewing policies, entering data, handling documents, billing, and admin work. The process is slow and messy because documents aren’t standardized, many people are involved, and it’s hard to gather good data.
+
+Our Solution
+
+We’ve built an AI platform that helps commercial insurance brokers save time by automating their most time-consuming tasks. Our AI can quickly compare insurance policies in a few minutes, answer any questions about key terms, and give a risk score based on selected level and the type of document and the question asked.
+
+Solution Architecture
+
+Deliverables
+
+AI Policy Analysis website
+
+Source codes
+
+Documentation
+
+Tech Stack
+
+Tools used React, Fast API Language/techniques used Next.js, Python, Typescript Models used OpenAI GPT-4o Skills used Web Development, AI Development, Database Management Databases used Supabase Database Web Cloud Servers used Google Cloud Platform (GCP)
+
+What are the technical Challenges Faced during Project Execution
+
+The main technical challenge we faced was with the AI prompts and the risk scoring system. It was giving the same scores for different policies, often in multiples of 5. This made it hard to tell which policy was actually better in terms of risk.
+
+How the Technical Challenges were Solved
+
+We solved the challenge by improving the way we designed the AI prompts. We created clear and detailed guidelines for how the AI should understand and respond to different types of questions. This helped the AI give more accurate answers and generate better risk scores. Specifically, we focused on refining the prompt structure to make sure the AI could tell the difference between similar policies and assign scores more precisely—not just in round numbers like 5, 10, or 15. With these changes, the risk scores became more reliable and useful for comparing policies.
+
+Business Impact
+
+By solving this problem, our AI platform now helps insurance brokers work much faster and make better decisions. Tasks that used to take hours—like comparing policies or understanding risk—can now be done in minutes. The improved risk scoring and answering  make it easier to choose the best policy, saving brokers time and helping companies get better insurance coverage. Overall, this leads to more efficient operations, higher client satisfaction, and better decision-making for everyone involved.
+
+Project Snapshots
+
+Project website url
+
+https://policy.riskcube.ai

@@ -1,0 +1,91 @@
+Building a Document QA Chatbot with n8n, Supabase, and Ollama on Windows
+
+Objective
+
+Set up an end-to-end pipeline using n8n on Windows to:
+
+Ingest documents (e.g., from Google Drive), Generate embeddings using Ollama, Store embeddings in Supabase, Retrieve relevant information from these embeddings, Answer user queries using DeepSeek-R1 (OpenRouter).
+
+Prerequisites
+
+Windows 10/11 WSL (Windows Subsystem for Linux) Git Node.js (LTS) Docker Desktop (for Ollama, if using Docker mode) Supabase account OpenRouter account with access to DeepSeek-R1
+
+Architecture
+
+The architecture illustrates an automated document processing QnA chatbot built using N8N. The workflow starts with a trigger that initiates file download from Google Drive. The downloaded document is loaded using a default data loader and split into chunks with a Recursive Character Text Splitter. These chunks are then converted into vector embeddings using the Ollama Embeddings model and stored in a Supabase Vector Store. When a user sends a message via the chat interface, it triggers the Question and Answer Chain. This chain uses a Vector Store Retriever to fetch relevant document embeddings from Supabase and processes the query with an OpenRouter chat model to generate a response. The system is designed to fully automate QnA by integrating document ingestion, embedding, storage, retrieval, and response generation.
+
+Architecture
+
+Step 1: Set Up n8n on Windows
+
+Option 1: Native (using Node.js)
+
+npm install n8n -g
+
+n8n
+
+Option 2: Using Docker
+
+docker run -it –rm \
+
+-p 5678:5678 \
+
+-v ~/.n8n:/home/node/.n8n \
+
+n8nio/n8n
+
+Access http://localhost:5678 in your browser.
+
+Step 2: Set Up Ollama on Windows
+
+Download Ollama
+
+From the official site: https://ollama.com
+
+Pull Model
+
+ollama run all-minilm
+
+This lightweight model is suitable for generating embeddings in your n8n pipeline.
+
+Step 3: Create Supabase Vector Store
+
+Create a Supabase Project Create a table document_embeddings with columns:
+
+id (uuid) embedding (vector) content (text) metadata (jsonb) created_at (timestamp)
+
+Enable pgvector extension:
+
+create extension if not exists vector;
+
+Step 4: Workflow 1 – Document Embedding
+
+Nodes Flow:
+
+Trigger – Manual (when clicking “Test Workflow”) Google Drive – Downloads selected .docx or .pdf Default Data Loader – Extracts raw text Recursive Character Text Splitter – Breaks into chunks Embeddings (Ollama) – Generates embeddings Supabase Vector Store – Stores them in document_embeddings
+
+Step 5: Workflow 2 – Q&A Chatbot
+
+Nodes Flow:
+
+Trigger – On chat message received Supabase Vector Store Retriever – Retrieves matching documents based on embedding similarity OpenRouter Chat Model (DeepSeek-R1) – Generates human-like answers Question and Answer Chain – Combines documents + user query for model Response – Returns JSON like:
+
+{ “response”: “Your summarized answer…” }
+
+Example in Action
+
+User Prompt:
+
+tell me project overview in short
+
+Model Output:
+
+The project involves integrating ChirpStack , InfluxDB , and Grafana … real-time monitoring dashboards… key sensors monitored include AM319, VS350…
+
+Outcome
+
+We have now a functioning document-based Q&A system using:
+
+Documents from Google Drive Embeddings via Ollama Storage via Supabase Responses from DeepSeek-R1 (OpenRouter)
+
+This enables users to ask questions and get intelligent answers grounded in uploaded documents.

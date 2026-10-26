@@ -1,0 +1,83 @@
+ETL Data Pipeline with Apache Airflow
+
+ETL Data Pipeline with Apache Airflow : Solution and Documentation
+
+Introduction
+
+This documentation provides a complete guide to setting up and using an ETL data pipeline with Apache Airflow on a Windows machine using WSL2. The pipeline extracts sample data, transforms it, and loads it, serving as a foundation for real-world ETL workflows.
+
+Setup Instructions
+
+The following steps replicate and consolidate the setup you’ve completed through Step 5, ensuring clarity for future reference or reinstallation.
+
+Architecture Diagram (Conceptual)
+
+Install WSL2 and Ubuntu
+
+Enable WSL2: Open PowerShell as Administrator and run:
+
+wsl –install
+
+Set WSL2 as Default: In PowerShell: wsl –set-default-version 2 Install Ubuntu: Open the Microsoft Store, install “Ubuntu 20.04 LTS.” Launch Ubuntu, set a username (e.g., airflowuser) and password (e.g., yourpassword). Update Ubuntu: In the Ubuntu terminal: sudo apt-get update && sudo apt-get upgrade -y
+
+sudo apt-get install -y python3 python3-pip python3-venv
+
+Install Apache Airflow
+
+Create a Project Directory: In Ubuntu: mkdir ~/airflow_project && cd ~/airflow_project Set Up a Virtual Environment: Create and activate: python3 -m venv airflow_venv
+
+source airflow_venv/bin/activate
+
+Install Airflow: Install Airflow 2.7.3 with constraints: pip install “apache-airflow==2.10.5” –constraint “https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.12.txt” Set Airflow Home: Configure and make permanent: export AIRFLOW_HOME=~/airflow
+
+echo “export AIRFLOW_HOME=~/airflow” >> ~/.bashrc
+
+source ~/.bashrc
+
+Initialize Airflow
+
+Initialize Database : Run: airflow db init
+
+This creates ~/airflow with configuration files and a SQLite database.
+
+Create Admin User: Create a user for the web UI: airflow users create \
+
+–username admin \
+
+–firstname Admin \
+
+–lastname User \
+
+–role Admin \
+
+–email admin@example.com Set a password (e.g., admin123).
+
+Start Webserver and Scheduler: In one Ubuntu terminal (with virtual environment activated): airflow webserver -p 8080 In a new Ubuntu terminal: cd ~/airflow_project
+
+source airflow_venv/bin/activate
+
+airflow scheduler
+
+Access Airflow UI: Open http://localhost:8080 in a browser. Login with admin and your password (e.g., admin123).
+
+Create the ETL Pipeline
+
+Create DAGs Folder: Run: mkdir ~/airflow/dags Add the ETL DAG: Create the DAG file: nano ~/airflow/dags/simple_etl_pipeline.py Paste the following code: Link: https://drive.google.com/file/d/1cWwh5LROMyWGW2TIA-7O8kdvHfIXKvmd/view?usp=sharing
+
+Save (Ctrl+O, Enter, Ctrl+X)
+
+Install Pandas Install the required library:
+
+pip install pandas
+
+Verify DAG: In the Airflow UI, check the “DAGs” tab for simple_etl_pipeline.
+
+Run and Monitor the Pipeline
+
+Enable the DAG: In the Airflow UI, toggle the switch for simple_etl_pipeline to “On”. Trigger a Run: Click simple_etl_pipeline, then the “Trigger DAG” button (play icon). Confirm by clicking “Trigger”. Monitor Execution: In the “Graph” view, check task statuses (extract_data, transform_data, load_data). Click a task, select “Log” to view outputs (e.g., “Data loaded successfully: {‘id’: {0: 2, 1: 3}, …}”).
+
+Video: https://www.loom.com/share/8906d615b371463dae0c6283b2f89fe5
+
+Conclusion
+
+This pipeline provides a free, functional ETL workflow using Apache Airflow on Windows via WSL2. The simple_etl_pipeline DAG demonstrates core ETL concepts and can be extended for real-world applications. By following this documentation, you can set up, run, monitor, and customize the pipeline to meet specific data processing needs.

@@ -1,0 +1,61 @@
+Azure Blob Parquet to DuckDB for Efficient Data Analytics
+
+Client Background
+
+Client: A leading tech consulting firm in the USA Industry Type: IT Products & Services: Data migration, data warehousing, and business intelligence. Organization Size: 100+
+
+The Problem
+
+The client managed a large-scale dataset consisting of numerous Parquet and CSV files stored in Azure Blob Storage . This decentralized storage format posed a challenge for efficient, unified data analysis and visualization in tools like Tableau . The core need was to migrate this data into a single, SQL-compatible database for streamlined querying and analytics
+
+Our Solution
+
+We developed a solution to seamlessly migrate the large-scale Parquet and CSV files from Azure Blob Storage into a unified DuckDB database . DuckDB’s in-process SQL OLAP capabilities allowed for efficient data ingestion and storage.
+
+The solution successfully integrated:
+
+Ten Parquet files (ranging from 2013 to 2022). Two supporting CSV files (locations.csv and prescribers.csv).
+
+The final output was a single, comprehensive database file, prescriber_data.duckdb, ready for connection to Tableau.
+
+Solution Architecture
+
+The solution architecture ensured a smooth, scalable data migration:
+
+Connecting to DuckDB: A connection was established, creating the database file, prescriber_data.duckdb, to serve as the central repository. Loading Parquet Files: The large Parquet files from Azure Blob Storage were loaded directly into DuckDB using the parquet_scan function . Each Parquet file was created as a separate table in the database (e.g., “parquet_2013” to “parquet_2022”). Loading CSV Files: The supporting locations.csv and prescribers.csv files were loaded into the database as separate tables (named “locations” and “prescribers”) using the read_csv_auto function . Data Verification: Thorough checks were conducted post-migration to verify data integrity, including inspecting the number of records, data types, and overall consistency across all new tables. Tableau Integration: The database was prepared for direct connectivity with Tableau using the appropriate JDBC driver .
+
+Deliverables
+
+Database File: The complete, integrated DuckDB database file (prescriber_data.duckdb), totaling 9.52 GB .
+
+Integrated Tables: All 10 Parquet files and 2 CSV files integrated as separate tables within the database.
+
+Python Code: Jupyter Notebook (Data_Migration.ipynb) and a neatly organized Python file (Data_Migration.py) containing the migration implementation.
+
+Documentation: Steps for connecting the new DuckDB database to Tableau using the JDBC driver
+
+Tech Stack
+
+Tools used DuckDB, Azure Blob Storage, Tableau, JDBC Driver Language/techniques used Python for scripting, SQL (through DuckDB) for data querying, DuckDB Models used N/A (Data Migration/ETL Project) Skills used Data Migration, Cloud Storage Management (Azure Blob), SQL Database Design, Data Integrity Verification, Business Intelligence Integration (Tableau). Databases used DuckDB Web Cloud Servers used Azure Blob Storage (for source data).
+
+What are the technical Challenges Faced during Project Execution
+
+A primary technical challenge was managing the large volume of data (totaling 9.52 GB ) spread across numerous files and ensuring a fast, reliable migration. Specifically, the process needed to directly load Parquet files from the cloud storage (Azure Blob) into DuckDB without intermediate staging or excessive memory usage.
+
+Another challenge involved ensuring data integrity across the multiple file types (Parquet and CSV) and years (2013-2022) during the integration process to guarantee the final database was accurate and consistent for analysis
+
+How the Technical Challenges were Solved
+
+The challenge of migrating large Parquet files directly from Azure Blob Storage was solved by leveraging DuckDB’s native capabilities for reading cloud-based files. The parquet_scan function was used to directly ingest the Parquet files from the Azure path, which is highly optimized for performance and efficiency with columnar formats like Parquet.
+
+For data integrity, a systematic approach was implemented:
+
+Explicit Table Creation: Each source file was mapped to a dedicated table (e.g., “parquet_2013”, “locations”) to maintain data separation and clarity. Data Verification: The solution included specific steps for data verification post-import, where key metrics like record counts and data types were checked for consistency, ensuring the final database structure was sound and accurate.
+
+Business Impact
+
+The project delivered substantial business impact by transforming disparate data storage into an optimized analytical asset:
+
+Streamlined Analytics: By migrating all 9.52 GB of data into a single SQL-compatible DuckDB database , the client can now perform complex joins and queries across all datasets (Parquet and CSV) and years (2013-2022) with ease. Enhanced Visualization: The seamless integration with Tableau allows the client to immediately create robust, interactive dashboards and visualizations, turning raw data into actionable insights. Improved Performance: DuckDB’s nature as an in-process analytical data management system provides fast query performance compared to querying individual files, accelerating the decision-making cycle.
+
+Reduced Complexity: The client now manages a single .duckdb file instead of numerous Parquet and CSV files, simplifying data management and accessibility for all analytical teams.

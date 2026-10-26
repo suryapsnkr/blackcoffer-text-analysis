@@ -1,0 +1,17 @@
+Building a Graph Based Chatbot with Langraph and Wikipedia Integration
+
+Overview
+
+This project implements a conversational chatbot using LangGraph , LangChain , and Groq LLM . The chatbot is enhanced with external tools (e.g., Wikipedia) to provide factual answers. The system is designed with modularity, making it easy to integrate additional tools in the future.
+
+Key Features
+
+LangGraph-based workflow to define chatbot state transitions. Groq LLM integration for natural language understanding and response generation. Wikipedia tool integration for fetching factual data. Streaming response handling for step-by-step event processing. Colab-compatible implementation with environment variable management.
+
+Architecture
+
+The chatbot workflow is represented as a directed graph:
+
+START → Chatbot Node : User input enters the chatbot node. Chatbot Node → Tool Node (Conditional) : If the chatbot requires external information, it calls the tool node. Tool Node → Chatbot Node : The tool fetches the required data and returns it to the chatbot. Chatbot Node → END : If no tool call is required, or after processing the tool response, the chatbot produces the final answer.
+
+Architecture Flowchart

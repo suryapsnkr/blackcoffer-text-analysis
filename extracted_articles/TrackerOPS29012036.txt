@@ -1,0 +1,67 @@
+IJOGR Correspondence Extractor: Automating Author Email Retrieval Across Volumes
+
+Client Background
+
+Client Name: A Research Institution Industry Type: Academic Research / Medical Journals Products & Services: Research publications, academic data management Organization Size: 100+ contributors and researchers About Client: Prof. Nachiket leads academic initiatives requiring structured data extraction from journal archives to streamline research communication and collaboration.
+
+Client Background
+
+The client needed to extract corresponding author email addresses from all papers in IJOGR volumes 10, 11, and 12.
+
+Manual extraction was slow, repetitive, and error-prone. Each paper contained only one email, embedded inside PDFs. Large data volume across multiple issues made manual work impractical.
+
+Our Solution
+
+We designed and implemented the IJOGR Correspondence Extractor , a Python-based automated pipeline that
+
+Crawls IJOGR archive pages for volumes 10–12. Collects article PDF links. Extracts corresponding author names and emails using text parsing and regex. Falls back to OCR for scanned PDFs. Outputs a clean CSV with Name, Email, PDF URL for each paper.
+
+Solution Architecture
+
+Web crawler – Navigates archive → volume → issue → article → PDF. PDF parser – Extracts text using pdfminer.six. Regex engine – Identifies email addresses. Name capture logic – Anchors on “Corresponding Author” text. OCR fallback – Uses Tesseract for image-based PDFs. Output pipeline – Stores results in CSV for reproducibility and auditability.
+
+Workflow Overview
+
+Crawler fetches PDFs. Parser extracts text. Regex Engine finds email addresses. Name Capture Logic associates names with emails. OCR Fallback ensures coverage for image-based PDFs. Output Pipeline logs results into CSV for reproducibility.
+
+Deliverables
+
+Automated pipeline script (extractor.py). CSV file with Name, Email, PDF URL for all papers in volumes 10–12. Documentation for setup, execution, and validation. QA notes highlighting edge cases and verification steps.
+
+Tech Stack
+
+Framework used
+
+Python scripting with modular functions.
+
+Language/techniques used
+
+Python, BeautifulSoup, pdfminer, regex, OCR.
+
+Model Used
+
+None (rule-based extraction).
+
+Skills used
+
+Web scraping, PDF parsing, regex design, OCR integration, reproducible pipeline design.
+
+Databases used
+
+CSV flat file output (no external DB required).
+
+Web Cloud Servers used
+
+Local execution; adaptable to cloud (AWS EC2 / Azure VM).
+
+What are the technical Challenges Faced during Project Execution
+
+PDFs with inconsistent layouts. Some PDFs were scanned images (no text layer). Identifying the correct author name near the email. Avoiding duplicate entries across issues.
+
+How the Technical Challenges were Solved
+
+Implemented OCR fallback for scanned PDFs. Designed regex anchored on “Corresponding Author” context. Added deduplication logic for PDF URLs. Introduced throttling to avoid server overload.
+
+Business Impact
+
+Reduced extraction time from 12+ hours manual → ~2-4 hours automated . Delivered a reproducible, auditable dataset for academic collaboration. Enabled scalability for future volumes with minimal effort. Improved confidence in data quality and reduced human error.

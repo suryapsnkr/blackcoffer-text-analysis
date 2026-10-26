@@ -1,0 +1,69 @@
+AI-Powered Health & Wellness Coach for Young Professionals
+
+Client Background
+
+Client: A leading healthtech firm in the USA Industry Type: AI Intelligence Products & Services: (SMS powered health assistant) Organization Size: 200+
+
+The Problem
+
+The client had developed an MVP of a wellness application, aimed at helping busy young professionals manage their health through AI-driven coaching via SMS. However, the deployed system had multiple issues:
+
+The chat feature—responsible for interacting with users and summarizing conversations—was malfunctioning. The SMS-triggered reminders were not being delivered consistently (Twilio). The backend, hosted on AWS Lambda, suffered from dependency conflicts and outdated packages. Chat history storage and retrieval was unreliable, affecting user experience and coach response quality.
+
+Our Solution
+
+Our team intervened to diagnose and rectify critical issues in the system. Key steps included:
+
+Code Debugging & Refactoring : We analyzed the existing Python codebase for logic and performance flaws and performed targeted fixes. Lambda Layer Optimization : We introduced AWS Lambda Layers to manage and update Python packages without bloating the function size. Feature Restoration : Fixed the chat history retrieval and summarization module, enabling seamless performance tracking. Reminder Engine Repair : Repaired the Twilio-based SMS scheduling logic, ensuring timely wellness prompts. Modular Enhancements : Structured the system for easier third-party API integrations, future scalability, and user-feedback-based iteration.
+
+Solution Architecture
+
+The solution architecture includes the following components:
+
+Frontend Interface : SMS-based user interaction powered by Twilio Backend Services : Serverless functions using AWS Lambda for handling chat logic, database operations, and third-party integration Database Layer : AWS RDS (MySQL) for storing chat history, user profiles, and reminders AI Module : GPT-3.5 for summarization and coaching logic Notification System : Twilio API to send reminders and responses
+
+Deliverables
+
+  Resolved SMS chat and reminder issues
+
+  Refactored and optimized AWS Lambda deployment
+
+  Implemented Lambda Layers for dependency management
+
+  Fixed chat history module and conversation summarization
+
+  Delivered a clean, scalable codebase for continued product enhancement
+
+Tech Stack
+
+Tools used AWS Lambda, AWS API Gateway, AWS RDS (MySQL), Twilio, Postman Language/techniques used Python, REST APIs, Serverless Architecture Models used OpenAI GPT-3.5 (for summarization and natural language coaching logic) Skills used Debugging, Chatbot Integration, Serverless DevOps, SMS Workflows, NLP Databases used AWS RDS – MySQL Web Cloud Servers used AWS (Lambda, API Gateway, RDS)
+
+What are the technical Challenges Faced during Project Execution
+
+Conflicting package dependencies in AWS Lambda environment Broken chat history persistence mechanism Twilio-based reminders failing silently without logging Latency issues due to poorly structured Lambda invocations
+
+How the Technical Challenges were Solved
+
+  Migrated bulky dependencies into Lambda Layers , significantly reducing cold-start times and avoiding deployment size limits
+
+  Refactored the chat history logic to ensure consistent writes and reads from RDS
+
+  Enhanced logging and error-handling in Twilio reminder module to detect and resolve silent failures
+
+  Optimized invocation patterns and reduced response latency across the board.
+
+Business Impact
+
+  100% restoration of chat and reminder functionality
+
+  Improved customer retention by enabling consistent daily interaction
+
+  Scalable, maintainable backend setup for future growth and user feedback integration
+
+  Boosted reliability and performance, leading to better end-user experience and higher engagement rates
+
+Project Snapshots
+
+Project website url
+
+https://www.trysonal.com/about

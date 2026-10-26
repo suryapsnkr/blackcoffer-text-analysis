@@ -1,0 +1,103 @@
+Cookie Order Automation using Make.com, Google Forms, Sheets, Email & Telegram
+
+1. Overview
+
+This automation streamlines the order fulfillment process of a cookie business using Make.com. When a customer fills out a Google Form, their order:
+
+is logged into Google Sheets, a thank-you email is sent automatically, and a Telegram message is sent to the fulfillment team.
+
+This documentation includes architecture, setup instructions, source code for Telegram integration, and guidance to run it on an automation server.
+
+2. Server
+
+This automation is fully cloud-based and does not require a local server. However, you may run it on a server dashboard for monitoring using:
+
+Make.com dashboard (Schedule control, error logs) Optional: Use a headless VPS with Telegram webhook verification for advanced features
+
+3. Solution Architecture
+
+Workflow Overview:
+
+Google Form Submission –> Make Trigger  –> Google Sheets (Add Row) –> Filter: Shipping address contains ‘India’?–> YES –> Send Thank You Email and Notify Telegram Group
+
+Services Used:
+
+Make.com: Central Automation Platform Google Forms: Customer Order Input Google Sheets: Order Tracking Database Gmail: Customer Thank You Email Telegram Bot: Fulfillment Team Notification
+
+Telegram Bot:
+
+Created via @BotFather Bot added to the group (as admin) Chat ID and Bot Token used in Make.com Telegram module
+
+4. Setup Instructions
+
+Step 1: Google Form
+
+Create a Google Form with the following fields:
+
+Name Email Address Shipping Address Cookie Type Quantity Special Instructions
+
+Copy the Form ID from the form URL.
+
+Step 2: Google Sheet
+
+Create a Google Sheet with these headers:
+
+Name Email Shipping Address Cookie Type Quantity Special Instructions Shipped (Manual entry)
+
+Step 3: Create Telegram Bot
+
+Go to @BotFather Use /newbot to create a bot Note down the BOT_TOKEN Add this bot to your Telegram group and make it an admin Use https://api.telegram.org/bot <your_bot_token>/getUpdates to fetch the CHAT_ID
+
+Step 4: Make.com Scenario
+
+Create New Scenario Trigger: Google Forms > Watch Responses Authenticate Google Paste Form ID Module: Google Sheets > Add Row Map all fields accordingly Filter: Only allow orders where shipping address contains “United States” Module: Email > Send Email Dynamic fields: Name, Cookie Type, Quantity Module: Telegram Bot > Send Message Bot Token, Chat ID, Dynamic message template
+
+Step 5: Schedule It
+
+Enable scheduling in Make Set to run every 15 mins (or as needed)
+
+5. How to Use It
+
+Share the Google Form link with customers Customers submit orders Make.com automatically processes each order: Logs to Google Sheet Sends email to customer Sends Telegram message to the team
+
+Use the Make dashboard to:
+
+View history Monitor errors Manage connections and limits
+
+6. Source Code (Telegram Message Block)
+
+Make.com uses drag-and-drop, but here’s how the Telegram message logic would be structured conceptually:
+
+Telegram Bot Message (Dynamic Text):
+
+New Order Alert!
+
+Name: {{Your Name}}
+
+Cookie: {{Cookie Type}}
+
+Quantity: {{Quantity}}
+
+Address: {{Shipping Address}}
+
+Telegram API (Optional Server-Side Test)
+
+import requests
+
+BOT_TOKEN = ‘your_bot_token_here’
+
+CHAT_ID = ‘-100xxxxxxxxxx’
+
+MESSAGE = ‘New cookie order from Kevin: 4 Chocolate Chips’
+
+requests.post(
+
+f”https://api.telegram.org/bot{BOT_TOKEN}/sendMessage”,
+
+data={“chat_id”: CHAT_ID, “text”: MESSAGE}
+
+)
+
+7. Future Enhancements
+
+Add support for international addresses Integrate with Stripe or Razorpay for payments Use a database backend instead of Google Sheets Add webhook for real-time syncing

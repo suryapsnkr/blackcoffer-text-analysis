@@ -1,0 +1,93 @@
+n8n Supabase & Ollama Workflow Automation
+
+1. Introduction
+
+This document describes the end-to-end workflow you built in n8n for:
+
+Downloading user documents from Google Drive. Converting documents into vector embeddings using the Ollama embedding model. Splitting text into manageable chunks. Storing embeddings in Supabase Vector Store. Accepting chat queries and answering via a Question-and-Answer (Q&A) chain.
+
+Your LLM of choice (Ollama) powers both embeddings and response generation.
+
+2. Architecture Overview
+
+flowchart LR
+
+subgraph Upload Pipeline
+
+A[“Click Test workflow”] –> B[Google Drive: Download file]
+
+B –> C[Supabase Vector Store: EmbedDocument]
+
+C –> D[Default Data Loader]
+
+D –> E[Recursive Character Text Splitter]
+
+E –> C
+
+C –> F[Embeddings Ollama]
+
+end
+
+subgraph Q&A Pipeline
+
+G[“Chat message received”] –> H[Question and Answer Chain]
+
+H –> I[Vector Store Retriever]
+
+I –> J[Supabase Vector Store]
+
+H –> K[Ollama Model]
+
+J –> L[Embeddings Ollama]
+
+end
+
+Upload Pipeline : Triggered manually via the “Test workflow” button. Downloads files, generates and stores embeddings. Q&A Pipeline : Triggered by new chat messages, retrieves relevant embedding chunks, and generates answers.
+
+3. Prerequisites
+
+n8n : Version ≥ 1.x with Google Drive and Supabase nodes installed. Supabase project : Create a Vector Store table with id, content, metadata, and embedding columns. Ollama : Running locally or accessible via API (http://localhost:11434 by default). Environment variables : SUPABASE_URL SUPABASE_SERVICE_KEY OLLAMA_EMBED_URL OLLAMA_MODEL_EMBED (e.g. llama2-7b) OLLAMA_MODEL_CHAT (e.g. llama2-7b-chat)
+
+4. Upload Pipeline Details
+
+4.1 Trigger Node: “Test workflow”
+
+Type : Manual trigger Description : Kicks off the upload sequence for one or more files.
+
+4.2 Google Drive: Download File
+
+Credentials : Google OAuth2 credentials Operation : download file Parameters : File ID : Set via expression or hard-coded Binary Property : data
+
+4.3 Supabase Vector Store: EmbedDocument
+
+Credentials : Supabase Service Role Key Operation : EmbedDocument Parameters : Document : Binary data from Google Drive Embeddings : Use the Ollama embedding model node
+
+4.4 Default Data Loader & Text Splitter
+
+Default Data Loader : Converts raw document into plain text Recursive Character Text Splitter : Chunk Size : 1000 characters Overlap : 200 characters
+
+4.5 Ollama Embeddings Node
+
+Endpoint : {{ $env.OLLAMA_EMBED_URL }}/embeddings Model : {{ $env.OLLAMA_MODEL_EMBED }}
+
+5. Q&A Pipeline Details
+
+5.1 Trigger Node: Chat Message Received
+
+Type : Webhook / Chat integration Description : Listens for incoming user chat messages
+
+5.2 Vector Store Retriever
+
+Vector Store : Supabase Retrieval Params : Top K : 5 Filter : Optional metadata filters
+
+5.3 Question and Answer Chain
+
+Model Node (Ollama Chat) : Endpoint : {{ $env.OLLAMA_EMBED_URL }}/chat Model : {{ $env.OLLAMA_MODEL_CHAT }} Chain Type : RetrievalQA (combine retrieved chunks + user query)
+
+6. Environment & Configuration
+
+Variable Description SUPABASE_URL Your Supabase project URL SUPABASE_SERVICE_KEY Service role key for full database access OLLAMA_EMBED_URL Base URL for Ollama server OLLAMA_MODEL_EMBED Embedding model name (e.g. llama2-7b) OLLAMA_MODEL_CHAT Chat model name (e.g. llama2-7b-chat)
+
+7. Testing & Deployment
+
+Manual Test : Click “Test workflow” in n8n UI to verify upload pipeline. Chat Simulation : Send a dummy query via your chat UI to confirm Q&A pipeline.

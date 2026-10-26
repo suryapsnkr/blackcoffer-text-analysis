@@ -1,0 +1,47 @@
+Graph-Based Lineage Management System Using Neo4j for Complex Relationship Modeling
+
+Client Background
+
+Client: A leading AI tech firm in the USA
+
+Industry Type: Equine Management and Animal Genetics.
+
+Products & Services: information technology and services with applications in sports/animal health analytics.
+
+Organization Size: 140
+
+The Problem
+
+The project required managing complex relationships between horses, such as parentage and lineage, which traditional relational databases struggled to represent efficiently. Tracking and querying these hierarchical and interconnected relationships became cumbersome and inefficient, limiting our ability to analyze and update horse data dynamically.
+
+Our Solution
+
+We implemented a graph database solution using Neo4j, which is specifically designed for handling interconnected data and relationships. Neo4j enabled us to naturally model the relationships between horses—such as parent and offspring connections—allowing for efficient querying and visualization of lineage data. This approach improved data clarity and retrieval speed for complex relationship queries.
+
+Solution Architecture
+
+The solution architecture involved setting up a Neo4j graph database hosted on a cloud platform, with nodes representing individual horses and edges capturing relationships like parentage. To keep the data current, we developed Google Cloud Functions that run on scheduled cron jobs. These functions automate the update of horse properties and relationships in the graph database, ensuring timely and accurate reflection of any changes.
+
+Deliverables
+
+Neo4j database, Cloud functions
+
+Tech Stack
+
+Tools used GCP, Graph database Language/techniques used Python Skills used Python Programming, Cloud Computing Databases used Neo4j Web Cloud Servers used Google cloud platform
+
+What are the technical Challenges Faced during Project Execution
+
+One key technical challenge was designing and maintaining the complex, evolving relationships between horses within the graph database while ensuring data integrity. Another was implementing robust automated updates that could run reliably without manual intervention
+
+How the Technical Challenges were Solved
+
+We solved this by leveraging Neo4j’s flexible schema and Cypher query language for easy updates and queries, combined with Google Cloud Functions triggered by cron jobs to automate property updates and maintain data freshness.
+
+Business Impact
+
+This graph database solution significantly improved the ability to analyze horse lineage and relationships, enabling faster decision-making and data-driven insights. Automation of data updates reduced manual workloads and errors, enhancing operational efficiency. Overall, the project strengthened data management capabilities and supported advanced analytics within the equine domain.
+
+Project website url
+
+https://www.stableanalytics.com

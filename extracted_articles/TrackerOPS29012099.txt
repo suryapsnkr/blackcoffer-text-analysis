@@ -1,0 +1,145 @@
+AI audio and text conversational bot using livekit
+
+Problem Statement : The stakeholder was looking for a skilled Python developer to enhance an existing Django-based project by integrating livekit.io’s voice agent capabilities. The solution is hosted on Google Cloud and Kubernetes, requiring expertise in these technologies for seamless integration and optimization. The developer must ensure high performance, robust security, and efficient hosting of new features. The project demands hands-on experience in Django, Google Cloud, and Kubernetes to deliver an innovative and reliable application. If you possess these skills and are passionate about cutting-edge development, this opportunity is for you.
+
+Livekit
+
+this is their sample app for reference:
+
+https://kitt.livekit.io/ code: https://github.com/livekit/agents
+
+https://github.com/livekit/agents-playground
+
+Tech Stack
+
+Python
+
+Django
+
+OpenAI
+
+LLM
+
+Livekit
+
+Deliverables
+
+Chatbot (Audio & Text)
+
+Source code with Django Framework Backend code Frontend Code
+
+Project Documentation: LiveKit Voice Assistant with Deepgram Integration
+
+Overview
+
+This project implements a voice assistant powered by LiveKit for real-time communication and Deepgram for speech-to-text transcription. The application is designed to facilitate seamless voice interaction in a virtual room, leveraging technologies such as:
+
+LiveKit RTC (Real-Time Communication): For creating and managing rooms and participants.
+
+Deepgram: For speech-to-text processing.
+
+OpenAI GPT: For generating context-aware responses.
+
+Additionally, the project includes a RoomManager for managing LiveKit rooms and a voice pipeline agent to handle VAD (Voice Activity Detection), STT, and TTS pipelines.
+
+Features
+
+Dynamic Room Management: Rooms are dynamically created, and participants are assigned unique tokens for access.
+
+Voice Interaction: Converts participant speech into text using Deepgram, processes it with OpenAI, and responds using TTS.
+
+Error Handling: Includes retry mechanisms and robust error logging for debugging.
+
+Deployment-Ready: Supports deployment on VMs or servers.
+
+Environment Variables
+
+Store sensitive credentials and configurations in a .env file.
+
+LIVEKIT_API_KEY=your_livekit_api_key
+
+LIVEKIT_API_SECRET=your_livekit_api_secret
+
+LIVEKIT_URL=wss://your-livekit-url
+
+DEEPGRAM_API_KEY=your_deepgram_api_key
+
+ROOM_NAME=default_room_name
+
+Setup the code: Project Documentation: LiveKit Voice Assistant with Deepgram Integration
+
+Code Walkthrough
+
+1. RoomManager
+
+The RoomManager class manages LiveKit rooms and participant connections.
+
+Initialization:
+
+room_manager = RoomManager()
+
+Key Methods:
+
+start(): Starts an asynchronous event loop in a separate thread.
+
+create_connection_details(): Creates a new LiveKit room and generates participant tokens.
+
+Example Usage:
+
+connection_details = room_manager.create_connection_details()
+
+print(connection_details)
+
+2. Voice Assistant Pipeline
+
+The VoicePipelineAgent is initialized with:
+
+VAD using Silero.
+
+Deepgram for STT.
+
+OpenAI for LLM and TTS.
+
+agent = VoicePipelineAgent(
+
+vad=ctx.proc.userdata[“vad”],
+
+stt=deepgram.STT(model=”nova-2-general”, api_key=os.getenv(“DEEPGRAM_API_KEY”)),
+
+llm=openai.LLM(),
+
+tts=openai.TTS(),
+
+chat_ctx=initial_ctx,
+
+)
+
+Setup
+
+1. Unzip the code repo
+
+cd your-repository
+
+2. Install Dependencies
+
+Use a virtual environment to isolate dependencies:
+
+python3 -m venv venv
+
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+3. Configure Environment
+
+Create a .env file in the root directory and populate it with the required variables.
+
+4. Run the Application
+
+Start the application using:
+
+python minimal_assistant.py dev
+
+Source code
+
+https://github.com/AjayBidyarthy/Livekit-chatbot-Audio-and-Text

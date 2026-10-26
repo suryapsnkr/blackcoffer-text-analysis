@@ -1,0 +1,95 @@
+Enhancing Front-End Features and Functionality for Improved User Experience and Dashboard Accuracy in Partner Hospital Application
+
+Client Background
+
+Client: A leading hospital chain in the USA
+
+Industry Type: Healthcare
+
+Products & Services: Healthcare solutions
+
+Organization Size: 200+
+
+The Problem
+
+Build a web application. Develop , deploy and maintain the system in the background, and there will be more hospitals partnering with our organization utilizing this tool per our service offering, which could lead to long-term working contracts with us, if interested.
+
+The current project is a HIPPA-compliant SPA Web Application that will interface with hospital data dashboards involving discharged patients. Call-Navigator utilizes an SFTP server that is hosted in AWS, this allows our partner hospital to store patient discharge files directly to an S3 bucket.
+
+The application and dashboard are currently up and running and pulling information and data from our partner hospital. However, the project was rushed through initial development and there are several front-end features that need to be addressed (or fine-tuned/upgraded) and functions added (search/flag options and redirection) to make the application more user-friendly (dashboard accuracy). There are deliverables such as reporting that is part of the project scope that was not developed but are considered a priority after the features and functionality are improved.
+
+According to the OG developer, a GitHub account for our organization will need to be created and code uploaded to two separate projects – one for backend and one for frontend.
+
+Let me know if this project would be something you would like to further discuss. Thank you so much for your time and consideration.
+
+More information from the OG developer follows:
+
+Developer should specifically know (or be able to learn) these specific AWS features since they will be responsible for deployment and maintaining the system.
+
+For deployment, the developer must:
+
+ modify AWS security groups and target groups, etc…
+
+ push code to product **DO NOT REMOVE OG DEVELOPER ACCESS/NETWORK CONNECTION**
+
+Currently, there are GitHub actions created that will deploy the code if you set up the proper secrets, GitHub actions on FE/Angular app with deploy code to our static S3 website as well as creations invalidations for CloudFront that bypasses the caching. An ssh config link and key file are available.
+
+Need to be able to pull reports on call info by unit, by caller, by diagnosis, physician or across the hospital, specifically on flags for medications, conditions, ect.
+
+– Flags and marked issues also need to be represented on the Facility Dashboard page.
+
+– Automate the import process of file from hospital.
+
+– Set up or ability to set up Hospital employees to log in with their Blessing Credentials (single sign on).
+
+– Flags thrown need to show up somewhere in Call Navigator and also be able to go into them and view patients and issues. Right now, the only notification and way to view this is strictly through email.
+
+– Ability to hover over icons on Facility Dashboard and see info and be able to click on info and have a page with that info pop up.
+
+– On the Discharge tab, when setting a filter, we want that filter to stay set unless we change it. Right now, if you set a filter and then go into a patient, when you come back out, the filter is not set anymore and you have to set all over again.
+
+Our Solution
+
+– Need to be able to pull reports on call info by unit, by caller, by diagnosis, physician or across the hospital, specifically on flags for medications, conditions, ect.
+
+– Flags and marked issues also need to be represented on the Facility Dashboard page.
+
+– Automate the import process of file from hospital.
+
+– Set up or ability to set up Hospital employees to log in with their Blessing Credentials (single sign on).
+
+– Flags thrown need to show up somewhere in Call Navigator and also be able to go into them and view patients and issues. Right now, the only notification and way to view this is strictly through email.
+
+– Ability to hover over icons on Facility Dashboard and see info and be able to click on info and have a page with that info pop up.
+
+– On the Discharge tab, when setting a filter, we want that filter to stay set unless we change it. Right now, if you set a filter and then go into a patient, when you come back out, the filter is not set anymore and you have to set all over again.
+
+Also, let me know if there is a “scope of project” document that we need to complete to help you and your team develop a project plan and timeline.
+
+Hopefully, with the above notes and attached files, you’ll be able to put together a project plan and proposal for this project.
+
+Deliverables
+
+Fully functional application product
+
+Maintenance and support
+
+Tech Stack
+
+Tools used VS Code Language/techniques used Angular Node.js Express.js Databases used MySQL Web Cloud Servers used AWS
+
+Project Snapshots
+
+Project website url
+
+https://callsnavigator.com
+
+Summarize
+
+Summarized: https://blackcoffer.com/
+
+This project was done by the Blackcoffer Team, a Global IT Consulting firm.
+
+Contact Details
+
+This solution was designed and developed by Blackcoffer Team Here are my contact details: Firm Name: Blackcoffer Pvt. Ltd. Firm Website: www.blackcoffer.com Firm Address: 4/2, E-Extension, Shaym Vihar Phase 1, New Delhi 110043 Email: ajay@blackcoffer.com Skype: asbidyarthy WhatsApp: +91 9717367468 Telegram: @asbidyarthy

@@ -1,0 +1,103 @@
+AI-Driven Data Analysis Tool using Langchain for a leading real estate and financing firm worldwide
+
+Client Background
+
+Client: A leading real estate financing firm worldwide Industry Type:  Real Estate, Financing, Construction Products & Services: Housing, malls, infrastructure, residential, commercial Organization Size: 1200+
+
+The Problem
+
+Creating a user-friendly data analysis tool capable of interpreting natural language queries and providing insightful analyses from CSV data. The tool should facilitate seamless interaction, enabling users to gain valuable insights without the need for technical expertise. Key functionalities should include data exploration, trend identification, pattern recognition, and anomaly detection, all presented in a comprehensible format. The tool must also ensure efficient handling of CSV datasets while maintaining accuracy and reliability in its analyses.
+
+Our Solution
+
+Data Ingestion and Conversion:
+
+CSV data is acquired from a source (local file system, cloud storage, etc.).
+
+The data is then converted into a pandas DataFrame using the read_csv() function or similar methods provided by the pandas library.
+
+Data Cleaning:
+
+Data Cleaning operations are performed on the dataframe so that it serves as an ideal input for Pandas Agent. These may include:
+
+Column Data type conversion.
+
+Handling Duplicates
+
+Handling unnecessary columns, etc.
+
+Initialization of Langchain’s Pandas Agent:
+
+Langchain’s Pandas Agent is initialized with the necessary parameters. These parameters include:
+
+System prompt: A custom prompt provided by the user or defined in the application.
+
+Temperature: A parameter controlling the randomness of the model’s outputs.
+
+Model: The specific model or model configuration to be used by the agent.
+
+Other relevant parameters based on the requirements and capabilities of the agent.
+
+Integration with Pandas DataFrame:
+
+The DataFrame created in the previous step serves as input for the Pandas Agent. It contains the structured data which will serve as input for the Pandas Agent.
+
+Natural Language Query Interpretation:
+
+The user interacts with the system by posing queries in natural language.
+
+Langchain’s Pandas Agent interprets these queries using GPT-4 backend and converts them into executable commands or operations on the DataFrame.
+
+DataFrame Operations:
+
+The Pandas Agent executes the operations needed on the DataFrame. These operations may include:
+
+Filtering : Selecting rows or columns based on specified criteria.
+
+Aggregation : Computing summary statistics or aggregating data based on groups.
+
+Transformation : Modifying data in the DataFrame (e.g., adding or removing columns, changing data types).
+
+Joining/Merging : Combining multiple DataFrames based on common keys or indices.
+
+Sorting : Arranging rows or columns in a specified order.
+
+Other pandas DataFrame operations as required by the user queries.
+
+Delivery to End User:
+
+The processed output is delivered to the end user through the streamlit user interface.
+
+The user can review the insights provided by the system and further refine their queries if needed.
+
+Solution Architecture
+
+Deliverables
+
+Data Analysis Tool with Streamlit frontend.
+
+Tech Stack
+
+Tools used Langchain, OpenAI gpt-4 API Language/techniques used Python Models used Pandas Agent, GPT-4 Skills used Python, Streamlit, Streamlit cloud deployment, Langchain Web Cloud Servers used Streamlit cloud
+
+What are the technical Challenges Faced during Project Execution
+
+To make the tool follow the Indian standards in terms of Financial Year Quarters, currency and human readable values instead of exponential values.
+
+How the Technical Challenges were Solved
+
+The challenge was solved by decreasing the temperature of Pandas agent to 0 and make a custom system prompt to introduce maximum bias approximating the desirable answers.
+
+Business Impact
+
+The user was able get data analysis insights without expertise in python, pandas and other tools used in the process of Data Analysis in a fraction of time compared to what it would have been if the process was done manually.
+
+Project Snapshots
+
+Frontend Streamlit Interface
+
+IDE Environment
+
+Project website url
+
+URL: https://app-test-pandas-agent-vjbjfjkmxfrvhkhc455p4k.streamlit.app/ (Non-Functional due to expiry of OpenAI API Key)

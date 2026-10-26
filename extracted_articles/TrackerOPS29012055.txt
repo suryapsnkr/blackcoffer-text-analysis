@@ -1,0 +1,61 @@
+Data Scraping and Structuring for RAG-Based AI BOT / AI Agent
+
+Client Background
+
+Client: A Leading Legal Tech Firm in the USA Industry Type: AI-Simulation / Complex Systems Modelling Cosmo Tech+1 Products & Services: Platform for system simulation, decision intelligence, digital twins for supply chain, assets and enterprise value chains Cosmo Tech Organization Size: 100+
+
+The Problem
+
+The client needed to build a retrieval-augmented-generation (RAG) agent focused on AI regulation, laws and rules. To enable this, data had to be collected from 7+ sources about AI regulation. The challenge was to gather and structure large volumes of regulatory content reliably. One major difficulty: from sources such as U.S. Securities and Exchange Commission (SEC) the pages were interconnected , metadata, comments, categories, and sometimes document links instead of direct text. The scraping process had to handle dynamic layouts, nested links, metadata extraction, and variable schema.
+
+Our Solution
+
+A dynamic web-scraper framework that adapts to page layouts, identifies key fields (date, name, category, summary, description), extracts the data, and ingests it into a structured schema in a Supabase database, preparing downstream flow for vector embeddings and RAG indexing.
+
+Solution Architecture
+
+The scraper triggers against target sources (e.g., Eurlex and SEC) For each source page: detect if it’s simple text or a link to a document, parse accordingly Extract metadata (date, categories, comments), summary and full description Normalize into standard schema: {date, name, category, summary, description, source_url} Insert cleaned and structured records into Supabase for later embedding workflows
+
+Deliverables
+
+A dynamic web-scraper capable of handling varied page layouts and nested links Data extraction pipeline for regulatory content from two high-complexity sources (Eurlex + SEC) Schema design and ingestion for structured records into Supabase Pipeline ready for vector embedding preparation
+
+Tech Stack
+
+Tools Used
+
+Web scraping libraries (e.g., Python requests + BeautifulSoup + Selenium) Supabase API for data insertion
+
+Language / Techniques Used
+
+Python Layout adaptation logic for varying HTML structures Metadata and content extraction Schema normalization
+
+Models Used
+
+None at this stage (pre-embedding)
+
+Skills Used
+
+Web scraping of complex regulatory websites Data modelling and schema design Database ingestion and API integration
+
+Databases Used
+
+Supabase (PostgreSQL backend)
+
+Web / Cloud Servers Used
+
+Hosted Python script environment (e.g., AWS Lambda / EC2 or similar) , specify if different
+
+What Were the Technical Challenges Faced During Project Execution
+
+Handling websites where content is hidden behind multiple linked pages or documents (not just a straightforward HTML text) Extracting consistent metadata (date, category) from heterogeneous layouts and formats Building scraper logic that is resilient to changes in page structure Ingesting and aligning data from disparate sources into a unified schema
+
+How the Technical Challenges Were Solved
+
+Built dynamic layout detection to switch scraper strategies (direct text vs. document link) Created metadata extraction modules that parse comments, categories, and nested links Developed schema normalization logic to unify fields across sources Used Supabase API to automate ingestion, allowing structured data to be ready for embedding workflows
+
+Business Impact
+
+Enabled the foundation for a RAG agent targeting regulatory content , accelerating model readiness Reduced manual data gathering effort and improved reliability of source ingestion Created structured, clean data sets which enhance downstream embedding quality and retrieval accuracy
+
+Positioned the client to scale regulatory coverage (7+ sources) without manual bottlenecks

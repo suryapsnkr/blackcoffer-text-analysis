@@ -1,0 +1,85 @@
+Facial Recognition Attendance System
+
+The Problem
+
+Manual attendance tracking is time-consuming and prone to errors such as buddy punching (proxy attendance). Existing biometric systems (like fingerprint scanners) require physical contact, which may be inconvenient, especially in environments where hygiene is essential.
+
+Our Solution
+
+The Facial Recognition Attendance System provides a touchless, efficient, and accurate way of marking attendance. The system uses a webcam to capture the user’s face, compare it against a pre-registered database, and automatically mark attendance if a match is found. This eliminates manual tracking and ensures authenticity.
+
+Solution Architecture
+
+User Registration: Collect user details (name, email) and capture facial images. Store user information and face embeddings in MongoDB. Mark Attendance: Capture the user’s face using the camera. Compare the captured face against registered embeddings using cosine similarity . If a match is found, attendance is marked in the database with a timestamp. Database Management: MongoDB stores user details and logs attendance records. UI: Developed with Streamlit for an easy-to-use interface. Users can navigate between Register and Mark Attendance sections through a sidebar.
+
+Deliverables
+
+Web Application: A user-friendly interface for registration and attendance. Database Integration: Stores user details and attendance logs in MongoDB. Facial Recognition Engine: Uses DeepFace to verify the user’s identity from captured images.
+
+Tech Stack
+
+Tools Used
+
+Streamlit : For building the web interface MongoDB : For storing user data and attendance logs DeepFace : For facial recognition NumPy : For performing similarity computations Pillow (PIL) : For image processing
+
+Language/Techniques Used
+
+Python : Core language for development Facial Recognition Models : Facenet model through DeepFace
+
+Models Used
+
+Facenet Model : Extracts 128-dimensional face embeddings for recognition
+
+Skills Used
+
+Web development Facial recognition Database management Data processing and similarity matching
+
+Databases Used
+
+MongoDB : NoSQL database to store users and attendance
+
+Web Cloud Servers Used
+
+Local Server (via Streamlit) MongoDB Atlas for cloud database management
+
+What are the Technical Challenges Faced during Project Execution
+
+Handling Face Variations: Faces with/without glasses or changes in lighting affected recognition. Performance with Multiple Users: As the number of registered users grew, the recognition process slowed. Session Handling: Ensuring that the registration and attendance pages behave independently without conflicts. Accuracy Threshold Tuning: Finding the right similarity threshold to balance false positives and negatives.
+
+How the Technical Challenges were Solved
+
+Face Variation Handling: Enabled users to register multiple face images to improve recognition accuracy. Performance Optimization: Used cosine similarity for faster matching and optimized the way embeddings are retrieved from MongoDB. Session Management Fixes: Used Streamlit’s session state to manage page navigation and inputs. Threshold Adjustment: Fine-tuned the similarity threshold to accommodate slight variations while avoiding incorrect matches.
+
+Business Impact
+
+Increased Efficiency: Attendance marking is instantaneous and automated, saving time for both students/employees and administrators. Reduced Errors: Eliminates human errors associated with manual attendance entry. Contactless Solution: Ideal for environments with hygiene concerns, especially post-pandemic. Enhanced Security: Prevents fraudulent attendance practices like proxy attendance.
+
+Project Snapshots (Minimum 10 Pictures)
+
+Home Page: Navigation menu for Register and Attendance sections.
+
+Register Section: Form to input name, email, and capture image.
+
+Image Capture: Camera input for user registration.
+
+Registration Confirmation: Success message after saving user details.
+
+Mark Attendance Page: Camera input for capturing face.
+
+Attendance Matching: Success message if face matches a registered user.
+
+Error Handling: Face not recognized message when no match is found.
+
+MongoDB Database View: Sample of stored user data and attendance logs.
+
+Log File: Screenshot of attendance records. Performance Optimization: Loading logs showing system behavior with multiple users.
+
+Project Website URL
+
+This project is currently hosted locally. To run it, clone the repository and execute:
+
+streamlit run app.py
+
+Github Link :
+
+https://github.com/vinayiet/Smart-attendance-System

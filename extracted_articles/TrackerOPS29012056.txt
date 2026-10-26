@@ -1,0 +1,67 @@
+Piccolo Foods – Boughey ↔ Cin7 Core Automated Integration Using Make.com
+
+Client Background
+
+Client: Piccolo Foods (Contact: Ben Hayes) Industry Type: Food & Beverage / FMCG Products & Services: Baby food products, organic food distribution, wholesale operations Organization Size: 100+
+
+The Problem
+
+Piccolo Foods relied on Boughey (3PL) and NetEDI/NetIX for order creation and dispatch updates. However, inventory and order information was not automatically syncing into Cin7 Core , causing:
+
+Delays in order visibility Manual data entry for non-NetEDI orders Frequent SKU/quantity mismatches No real-time stock accuracy across locations Warehouse batch numbers not reflected in Cin7 Inconsistent PONumber formats causing update failures Operational inefficiencies and reconciliation overhead
+
+The client needed one unified, automated pipeline that keeps Cin7 fully synchronized with Boughey’s events in real time.
+
+Our Solution
+
+We built a fully automated ETL pipeline using Make.com , which listens to Boughey webhook events and transforms them into Cin7-compatible API calls.
+
+Key capabilities delivered:
+
+Real-time order lifecycle automation : OrderConfirmed → OrderShorted → OrderPicked → OrderDelivered → Invoice Creation Automatic stock adjustments across warehouses/locations Dynamic price fetching from Cin7 at run-time Automatic tax rule assignment for every order line Data sanitization + normalization to avoid mismatches Batch, expiry, and SKU-level accuracy
+
+The integration eliminated nearly all manual updates and ensured a consistent, real-time view of all Boughey operations inside Cin7.
+
+Solution Architecture
+
+Deliverables
+
+Fully functional Make.com ETL integration Boughey → Cin7 automated workflows Real-time inventory sync system Automated order lifecycle handling Price/tax resolution logic Normalized PONumber matching system Fully documented workflow (v1.5) Post-handover fixes and optimization
+
+Tech Stack
+
+Tools Used
+
+Make.com (workflow automation) Cin7 Core API Boughey Webhooks / NetEDI events JSON/XML processing tools
+
+Language / Techniques Used
+
+REST API design Data transformation + schema mapping Payload normalization Error-handling logic Dynamic routing logic
+
+Models Used
+
+(Not applicable for this project — no AI models used)
+
+Skills Used
+
+API integration Workflow automation ETL design Data validation Inventory systems understanding Debugging and runtime error handling
+
+Databases Used
+
+Make.com Data Store (temporary mapping store)
+
+Web / Cloud Servers Used
+
+Make.com cloud execution environment Cin7 cloud API Boughey webhook endpoints
+
+What Were the Technical Challenges Faced During Project Execution
+
+Boughey sent mixed XML/JSON payloads with inconsistent structures Location names were case-sensitive , causing frequent stock mismatches PONumber inconsistencies (suffixes like /25, -S) broke Cin7 lookups Need to handle batch numbers and expiry dates reliably Pricing rules in Cin7 varied per customer Non-NetEDI orders lacked full details and couldn’t auto-create in Cin7 Cin7’s API had strict formatting and tagging requirements AutoPickPackShip workflow had a batch assignment bug in Cin7 High operational volume required minimizing API calls and Make.com operations usage
+
+How the Technical Challenges Were Solved
+
+Built a schema-flexible parser to handle inconsistent payloads Added location sanitization rules (case + whitespace normalization) Implemented PONumber normalization to strip suffixes before lookup Created robust mapping for SKU ↔ Material + Batch/Expiry handling Added real-time price fetching from Cin7 API to avoid stale price mapping Introduced dynamic tax rule assignment (“Zero Rated Income”) Implemented a workaround for the Cin7 batch bug using AutoPickPackShip mode Used Make.com Data Store to maintain reliable Sale ID mappings Optimized workflow structure to minimize API calls and scenario operations
+
+Business Impact
+
+90% reduction in manual entries for order and inventory updates Real-time visibility of warehouse operations inside Cin7 Faster dispatch-to-invoice workflow , reducing turnaround times Eliminated SKU, quantity, and batch mismatches Improved accuracy in invoices, stock levels, and fulfillment reports Reduced operational overhead for Piccolo’s supply chain and finance teams Improved reliability and transparency for Piccolo’s retailer partners

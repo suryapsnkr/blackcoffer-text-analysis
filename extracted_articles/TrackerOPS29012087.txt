@@ -1,0 +1,67 @@
+AI Question Routing using LangGraph
+
+Objective
+
+To build an AI system that intelligently routes user questions to the appropriate information source:
+
+For AI-related topics (agents, prompt engineering, adversarial attacks), it uses a private knowledge base (via RAG and vector database). For general topics, it uses Wikipedia to fetch the answer.
+
+Tools and Technologies
+
+Component Technology LLM for Routing Groq (Gemma2-9b-It) via LangChain Knowledge Base Astra DB (Cassandra) with HuggingFace embeddings Web Search Wikipedia API (via LangChain tools) Document Loader WebBaseLoader Vector Indexing LangChain VectorStoreIndexWrapper Workflow Engine LangGraph Frontend (optional) Gradio Development Env Google Colab
+
+Architecture Flow
+
+Workflow Description
+
+The user’s question enters the LangGraph app. A routing LLM decides whether the question should go to: The vector database (for technical questions), or Wikipedia (for general knowledge). Based on this decision, LangGraph routes the input to the appropriate node. The result is returned with the source (vectorstore or wiki_search) specified.
+
+Setup Instructions (in Google Colab)
+
+Step 1: Install Required Libraries
+
+Run this in the first Colab cell:
+
+!pip install langchain langgraph cassio langchain_community
+
+!pip install -U tiktoken langchain-groq langchainhub langchain_huggingface
+
+!pip install arxiv wikipedia gradio
+
+Step 2: Connect to Astra DB
+
+Update the following credentials in the script with your Astra DB token and database ID:
+
+ASTRA_DB_APPLICATION_TOKEN = “your_token_here”
+
+ASTRA_DB_ID = “your_db_id_here”
+
+Step 3: Load and Embed Documents
+
+The script will:
+
+Load 3 AI-related blog posts using WebBaseLoader. Split them into chunks. Embed them using HuggingFace. Store them into Astra DB for vector retrieval.
+
+Step 4: Define LangGraph Workflow
+
+The LangGraph is built with:
+
+A router node using Groq LLM. Two branches: wiki_search and retrieve. Conditional edges based on question type.
+
+Step 5: Run Inference
+
+You can test the system by changing the question like this:
+
+inputs = {“question”: “What is agent?”}
+
+The response will either come from the vectorstore (RAG) or Wikipedia based on the router’s decision.
+
+How to Use
+
+In Colab
+
+Open the notebook and run all cells. Ask a question using the defined inputs. The system will display: The retrieved answer. The node (either vectorstore or wiki_search) that handled it.
+
+Locally with Gradio (optional)
+
+Just run the collab file it will directly start

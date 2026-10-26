@@ -1,0 +1,111 @@
+Integrating Machine Learning Code into Kubeflow Pipeline – Kuberflow MLOps Kubernetes
+
+Objective: Deploy a machine learning pipeline in Kubeflow to automate the workflow
+
+Step 1: Prerequisites
+
+Kubernetes : A container orchestration platform. Kubeflow : A platform built on Kubernetes for building and deploying scalable ML workflows. Goal : Automating machine learning workflows and deployment using Kubeflow Pipelines.
+
+Step 2: Environment Setup
+
+Set up Kubernetes Cluster :
+
+We can install minikube and start it by running below command
+
+minikube start
+
+Install Kubeflow :
+
+For Minikube , follow the kubeflow.org documentation to install Kubeflow.
+
+Verify Kubeflow Installation :
+
+After installation, access the Kubeflow Dashboard via its URL or port-forward it to your local machine:
+
+kubectl port-forward -n kubeflow svc/ml-pipeline-ui 8080:80
+
+Step3: Prepare Your ML Code
+
+Containerize Your Code
+
+Step4: Create the Kubeflow Pipeline
+
+Ex:  # pipeline.py
+
+from kfp import dsl
+
+@dsl.pipeline(
+
+name=’Iris Classification Pipeline’,
+
+description=’A simple ML pipeline for classifying iris species.’
+
+)
+
+def iris_pipeline():
+
+# Step 1: Data Preprocessing
+
+preprocess_op = dsl.ContainerOp(
+
+name=’Preprocess Data’,
+
+image=’nanduri/ml-pipeline:latest’,
+
+command=[‘python’, ‘preprocess.py’],
+
+)
+
+# Step 2: Model Training
+
+train_op = dsl.ContainerOp(
+
+name=’Train Model’,
+
+image=’nanduri/ml-pipeline:latest’,
+
+command=[‘python’, ‘train.py’],
+
+).after(preprocess_op)
+
+# Step 3: Model Evaluation
+
+eval_op = dsl.ContainerOp(
+
+name=’Evaluate Model’,
+
+image=’nanduri/ml-pipeline:latest’,
+
+command=[‘python’, ‘evaluate.py’],
+
+).after(train_op)
+
+if __name__ == ‘__main__’:
+
+from kfp.compiler import Compiler
+
+Compiler().compile(iris_pipeline, ‘iris_pipeline.yaml’)
+
+Step4: Compile the Pipeline
+
+Run the pipeline.py file to generate the pipeline YAML
+
+Python pipeline.py
+
+This will generate a file called iris_pipeline.yaml.
+
+Step 5: Deploy to Kubeflow
+
+Access Kubeflow UI: Open the Kubeflow UI in your browser (usually at http://<your-kubeflow-ip>:8080). Open the Kubeflow UI .
+
+Upload Pipeline from UI
+
+  Go to the “Pipelines” section.
+
+  Click on “Upload Pipeline” and upload the iris_pipeline.yaml file.
+
+Run the Pipeline
+
+After uploading, you should see your pipeline listed. Click on it to run.
+
+Once create run it shows like this

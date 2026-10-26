@@ -1,0 +1,193 @@
+Sparrow Control System
+
+Client Background
+
+Client:  A Security & tech firm in Israel
+
+Industry Type: Security Services
+
+Products & Services: Security Services
+
+Organization Size: 200+
+
+The Problem
+
+The client needed to deploy multiple AI systems—including Event Analysis, Indoor Counting, and Face Recognition—on several edge devices (AI3, AI5, AI7, AI8, AI9) during their development phase. A critical requirement was to keep the application source code private, as the client intended to sell the AI solutions without exposing the underlying code.
+
+Using cloud infrastructure (like AWS or GCP) was not a viable option due to high GPU costs and the early stage of the AI systems. Moreover, the applications were tightly coupled with hardcoded configurations (e.g., `localhost` backends), causing integration issues when tested across different environments.
+
+Our Solution
+
+A Blackcoffer DevOps engineer collaborated with the client to Dockerize all AI systems, allowing them to be deployed easily on edge devices without requiring access to the source code. This ensured full code protection and simplified deployments across different machines.
+
+We tested and validated each Docker container on client-provided GPU-enabled machines (AI3, AI5, AI7, AI8, AI9), ensuring:
+
+Consistent behavior across environments Proper GPU utilization Correct mounting of remote directories Replacement of hardcoded values with dynamic configurations
+
+This approach allowed the client to confidently test and showcase their AI products, while preserving code confidentiality and avoiding unnecessary cloud expenses during development.
+
+Solution Architecture
+
+🧠 Face Recognition System:
+
+🔁 Flow Description (Right to Left):
+
+📷 Camera:
+
+Captures live video feed.
+
+🖥️ Face Recognition System (Edge Device):
+
+Detecting faces in the incoming video. Saves cropped face images or recognition results (e.g., match info, timestamps) to srv1public storage.
+
+🌐 Web Application (Controller Dashboard):
+
+Interfaces with the Face Recognition System and srv1public:
+
+🗃️ srv1public (Storage System):
+
+Shared storage system used by AI components.
+
+🧠 Indoor Counting System:
+
+🔁 Flow Description (Right to Left)
+
+📷 Camera:
+
+Monitors indoor areas (e.g., entrances, corridors). Streams real-time video to the Indoor Counting System. Video feed may use RTSP or USB connection depending on setup.
+
+🖥️ Indoor Counting System (Edge Device):
+
+Receives camera feed and performs live object detection using an AI model (e.g., YOLO + tracking). Counts people entering and exiting the monitored area.
+
+🌐 Web Application (Controller Dashboard):
+
+Acts as the central control panel. Interfaces with the Indoor Counting System to: Start/stop AI detection.
+
+Deliverables
+
+Dockerized AI Systems Fully containerized versions of the following AI systems: Event Analysis Indoor Counting Face Recognition Each packaged to run independently on any machine with Docker and GPU support. Private Deployable Binaries No source code shared—only Docker images provided. Secure and portable for client-side deployment and demo. Edge Device Integration & Testing Successful deployment and GPU verification on: AI3 AI5 AI7 AI8 AI9 Configured remote directory mounts and system-level integration. Environment-Independent Configuration Removed hardcoded values. Used dynamic domain-based routing. Documentation & Deployment Guide Clear instructions for: Running containers on new edge devices Mounting required directories Basic troubleshooting GPU verification inside containers Internal Testing Reports Logs and screenshots from testing sessions Notes on GPU recognition, output accuracy, and stability Support for Future Packaging Guidance for the client on how to repackage/redeploy the containers if updates are made
+
+Tech Stack
+
+Containerization & Runtime:
+
+Docker – Used to package all AI applications into isolated, portable containers.
+
+AI Frameworks & Libraries:
+
+OpenCV – For real-time computer vision processing PyTorch / TensorFlow – For deep learning models (depending on the AI system) CUDA – GPU acceleration (NVIDIA drivers & libraries) Torchvision – For image handling and pre-trained model support (for PyTorch systems) Ultralytics YOLO – Used in Event Analysis and Counting systems for object detection.
+
+System Environment:
+
+Ubuntu/Linux-based Host OS – On AI client machines NVIDIA GPU Drivers – Installed on host for container GPU access Docker + NVIDIA Container Toolkit – To enable GPU passthrough to containers
+
+Networking & Access
+
+Local Network Mounts – For video inputs, logs, and results Custom domain routing – To access applications via browser
+
+Development Tools
+
+Python – Core programming language for all AI logic Flask / FastAPI – For serving AI APIs inside containers
+
+What are the technical Challenges Faced during Project Execution
+
+GPU Support Inside Docker Containers:
+
+Ensuring GPU access inside Docker containers was complex, especially on varied client machines. We had to correctly install and configure NVIDIA drivers, CUDA, and the NVIDIA Container Toolkit on each system. Some machines had outdated drivers or missing dependencies which caused deployment failures initially.
+
+No Cloud Infrastructure:
+
+Since the client opted not to use cloud platforms (like AWS, GCP) due to GPU costs and early development stage, we had to set up and maintain onpremise environments manually. This required extra effort in setting up manual monitoring, remote access, and deployment processes on each AI system.
+
+Securing the Application Code:
+
+One of the client’s core requirements was to protect the source code. We had to ensure the application runs entirely in Docker containers without exposing any source files. Additional steps were taken to remove source code, compile models into binaries, or build from compiled .pyc files when necessary.
+
+Diverse AI Systems, Each with Unique Requirements:
+
+Each AI system (Event Analysis, Indoor Counting, Face Recognition) had different dependencies, models, and runtime needs. Building and testing Docker images for each individually required significant coordination.
+
+Local Network File Mounting:
+
+Some AI systems required access to shared folders (e.g., /mnt/share). Configuring persistent and permissionsafe mounts across different client OS environments needed troubleshooting and scripting.
+
+How the Technical Challenges were Solved
+
+GPU Support Inside Docker Containers
+
+Challenge: Ensuring reliable GPU passthrough on varied client hardware.
+
+Solution:
+
+Installed and verified correct NVIDIA drivers, CUDA toolkit, and NVIDIA Container Toolkit on each client machine. Validated GPU access inside containers using `nvidia-smi`. Created minimal test containers to confirm GPU visibility and CUDA availability before deploying AI systems. Added logging steps to detect and report GPU access failures.
+
+No Cloud Infrastructure
+
+Challenge: No AWS/GCP deployment due to high GPU cost and early development stage.
+
+Solution:
+
+Set up on-premise deployments manually using `docker build` and `docker run` commands. Provided step-by-step manual deployment scripts and a minimal monitoring strategy using cron jobs where needed.
+
+Securing the Application Code
+
+Challenge: Source code confidentiality was critical.
+
+Solution:
+
+Used multi-stage Dockerfiles to exclude source code from final images. Only compiled files (`.pyc`) or binaries were included. Removed all dev tools and shell access from containers. Delivered private Docker images only—no source shared.
+
+Diverse AI Systems with Unique Dependencies
+
+Challenge: Each AI module (Event Analysis, Indoor Counting, Face Recognition) had different frameworks, libraries, and model formats.
+
+Solution:
+
+Created separate Dockerfiles per system, tailored to each module’s needs (PyTorch, TensorFlow, YOLO, etc.). Maintained version control via clear folder naming and image tags. Shared consistent runtime structure and entrypoints for easier troubleshooting and maintenance.
+
+Local Network File Mounting
+
+Challenge: Cross-system compatibility and permission issues with mounted folders like `/mnt/share`.
+
+Solution:
+
+Configured `docker run` commands with dynamic mount paths based on each client environment. Verified mounts using test read/write scripts within containers. Provided custom scripts for auto-mounting remote shares with proper user/group permissions. Ensured path consistency across Linux environments (Ubuntu).
+
+Business Impact
+
+Significant Cost Savings:
+
+By avoiding cloud platforms like AWS or GCP (which have high GPU rental costs), the client was able to dramatically reduce development and testing expenses by using their own edge machines (AI3–AI9).
+
+Full Protection of Intellectual Property:
+
+The client was able to demonstrate and test their AI systems without ever exposing source code, preserving the commercial value of their proprietary models and algorithms.
+
+Faster and Repeatable Deployments:
+
+With Dockerized AI systems and documented manual deployment workflows, the client can now roll out new builds quickly and consistently across any number of edge devices without reconfiguring environments.
+
+Product-Ready Packaging:
+
+The project output included production-grade, containerized binaries that the client can distribute, sell, or demo to stakeholders confidently—without any dependency on developer environments.
+
+Increased Testing Reliability Across Machines:
+
+Uniform container behavior and dynamic configuration replaced hardcoded setups, resulting in more reliable and realistic testing scenarios on different hardware and environments.
+
+Reduced Technical Support Overhead:
+
+With internal logs, GPU verification scripts, and deployment documentation provided, the client’s internal team is now empowered to deploy and troubleshoot systems independently, reducing reliance on the engineering team.
+
+Project Snapshots:
+
+Controller system – Indoor Counting, Face Recognition:
+
+Indoor Counting System:
+
+Face Recognition System:
+
+Contact Details
+
+This solution was designed and developed by Blackcoffer Team Here are my contact details: Firm Name: Blackcoffer Pvt. Ltd. Firm Website: www.blackcoffer.com Firm Address: 4/2, E-Extension, Shaym Vihar Phase 1, New Delhi 110043 Email: ajay@blackcoffer.com WhatsApp: +91 9717367468 Telegram: @asbidyarthy

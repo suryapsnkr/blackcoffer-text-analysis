@@ -1,0 +1,101 @@
+Automated Amazon Multi-Inventory Management & Risk Dashboard (KNIME + Tableau)
+
+Client Background
+
+Client: A leading inventory managenent tech firm in the USA
+
+Industry Type: E-commerce / Consumer Products
+
+Products & Services: Physical consumer products sold through Amazon and other online channels
+
+Organization Size: 100+
+
+About the Client: The client is a fast-growing e-commerce business operating across multiple Amazon FBA marketplaces. With a diverse product catalog and inventory distributed across several Amazon fulfillment centers, their operations depend heavily on accurate, real-time inventory visibility.
+
+The Problem
+
+Managing Amazon FBA inventory requires large multiple raw data streams  such as the Amazon Ledger, Order Reports, and warehouse-level balance files.
+
+The Amazon Ledger itself is very detailed and mixes many different types of movements in one place receipts, adjustments, transfers, removals, fulfillments, restock updates, and inventory balances across multiple fulfillment centers. The Order Reports are separate, structured differently, and don’t directly align with the ledger.
+
+Because of this, answering basic questions like:
+
+“How much stock do I really have per SKU?” “When will I run out if a big S01 (special bulk) order hits?” “What should I reorder this week, and how much?”
+
+and many other day-to-day decisions that should ideally be available at a glance instead of requiring hours of  manual work. The process was Slow , Inconsistent and Error-Prone.
+
+Without automation, it was very hard to:
+
+Get a single trusted view of inventory health per SKU Separate normal demand vs S01 special-order patterns Reliably calculate standard KPIs like daily sales, 30-day rolling demand, ROP, Safety Stock, EOQ, Inventory Turnover, GMROI, and service-level metrics Trigger proactive alerts when SKUs were at risk of stockout
+
+The client needed an automated, repeatable system that could ingest all Amazon files, standardize and join them, compute the full set of inventory and risk KPIs (including S01 behavior), and expose everything in a simple Tableau dashboard with clear alerts and priorities.
+
+Our Solution
+
+We built an end-to-end KNIME-based ETL + analytics pipeline with a connected Tableau dashboard on top.
+
+The solution:
+
+Automated Data Pipeline in KNIME Ingests Amazon Ledger , Order Reports , and SKU/ASIN mapping files. Cleans, standardizes, and joins all data at SKU + date level. Aligns quantities and dates across fulfillment centers. Inventory KPI Engine Computes all key inventory metrics: Units Sold, In-Transit, Available Stock Inventory Turnover, DSI, Sell-Through Rate, Stock-to-Sales Ratio Reorder Point (ROP), Safety Stock, EOQ, Lead Time Demand COGS, Carrying Cost %, GMROI, Inventory Accuracy LightGBM-based Demand Forecasting Uses historical daily sales to forecast future SKU-level demand. Evaluates model quality using MAE, RMSE, R², forecast accuracy %, and bias. Inventory Alert System Identifies SKUs at risk of stockout based on: Current stock Sales velocity Lead time Sends email alerts via SMTP when thresholds are breached or when stock recovers. S01 Special-Orders Risk Model Separately analyzes S01 (special bulk) orders. Calculates impact on inventory if another S01 event hits. Classifies each ASIN into P1/P2/Info based on impact and likelihood. Tableau Dashboard Consumes KNIME’s final master output. Provides interactive views: Overall inventory health KPI trends S01 risk views (impact vs likelihood) Priority list of SKUs needing action
+
+The final result: a single, automated system that turns complex Amazon data into practical, visual, and proactive inventory intelligence ready for a quick look up and helping in managing your inventory efficiently.
+
+Solution Architecture:
+
+Data Sources (Input) Amazon FBA Ledger (RS AMZ LEDGER.csv) Amazon Order Reports / Sales Master BASE FILE FOR KPI.csv (contains S01 order data) SKU–ASIN mapping files KNIME Layer Data cleaning, deduplication, type fixing Ledger event classification (receipts, adjustments, sales, transfers, removals) Aggregation to daily SKU level KPI computation (inventory, efficiency, replenishment, profitability, service levels) LightGBM demand forecasting (Python scripting node) S01 risk model calculations (impact & likelihood) Alert state logic and email notifications Output Layer Final master KPI table (SKU-level) exported in Tableau-ready format Separate S01 risk table and alert table where needed Visualization Tableau workbook connected to KNIME output: Inventory overview KPI breakdowns S01 risk matrix & P1/P2 lists Trends and drill-downs
+
+Deliverables
+
+KNIME Workflow for:
+
+Inventory ETL & KPI computation LightGBM-based demand forecasting Inventory alert generation S01 risk model logic
+
+Tableau Dashboard for:
+
+Inventory KPIs & trends Replenishment views S01 risk matrix (impact vs likelihood) Priority SKU list for action
+
+Master KPI Output File
+
+Single table per SKU with: Demand, stock, KPIs, risk flags, and S01 risk classification
+
+Alerting System
+
+Configurable email alerts (Gmail SMTP + app password) Alert history & recovery alerts
+
+Tech Stack
+
+Tools used
+
+KNIME Analytics Platform – ETL, KPI logic, integrations Tableau – Final dashboard & visualization Python inside KNIME – KPI logic, LightGBM forecasting, alert engine Google Drive / CSVs – Source data storage SMTP (Gmail) – Alert email sending
+
+Language / techniques used
+
+Python (Pandas, NumPy) KNIME node-based ETL design Time-series style demand modeling (daily SKU data) Statistical KPI calculation (inventory & service metrics) Rule-based risk scoring (S01 model)
+
+Models used
+
+LightGBM Regressor for SKU-level demand forecasting: Features: Daily sales lags (1, 7, 14 days) Rolling windows (7 & 14-day SMA, EMA) Volatility (rolling std) Trend indicators (trend_7, trend_ratio) Evaluated with: MAE, RMSE, R², Forecast Accuracy %, Bias, Demand Variability
+
+Skills used
+
+Data engineering & ETL design Inventory analytics & supply chain KPIs Machine learning for demand forecasting Risk modeling & rule-based scoring Dashboard design and storytelling in Tableau Email automation & alert systems
+
+Databases used
+
+No traditional DB; primary data is from: Amazon Ledger CSVs Amazon Order Reports KPI base files / mapping sheets
+
+What are the technical Challenges Faced during Project Execution:
+
+Complex, noisy Amazon Ledger structure Mixed events (receipts, adjustments, transfers, removals, FBA movements) in one table. Hard to identify what actually counts as “sales” vs internal movements. Multiple data sources with different formats Ledger, Order reports, KPI base file, and mapping sheets had different schemas. SKU/ASIN mapping inconsistent across files. Missing & irregular data Gaps in dates (no orders on some days). Missing quantities or unclear statuses for some orders. Forecasting on sparse SKU-level data Some SKUs had volatile or low-volume sales. Needed forecasting that remains robust and interpretable. Designing a practical S01 risk model Had to combine: Historical S01 size & frequency Normal daily demand Current inventory & open S01s Needed a methodology that is transparent and explainable to the client. Alert noise vs usefulness Risk of spamming alerts for the same SKU repeatedly. Needed clean logic for: Critical vs Urgent vs Recovery alerts Alert frequency control Performance & maintainability in KNIME Large files and many joins can quickly slow down execution. Pipeline needed to be understandable and editable by non-developers.
+
+How the Technical Challenges were Solved
+
+Event classification & standardized schema Classified Ledger rows into categories: Sales, Receipts, Transfers, Adjustments, Removals, etc. Only true demand movements were used for sales/demand KPIs. Robust preprocessing layer in KNIME Normalized SKU/ASIN keys across all inputs. Standardized column names and date types. Removed duplicates and cleaned missing values using clear rules. Complete date × SKU grid Built a full calendar grid per SKU to: Fill missing days with zero sales Enable rolling windows and lag features cleanly Feature-rich LightGBM modeling Used lag, rolling, trend, and volatility features for each SKU. Evaluated model performance with multiple metrics, not just one. Kept configuration documented and adjustable inside KNIME. Transparent S01 risk framework For each ASIN: Calculated average and max S01 size Determined median interval between S01 events Measured current inventory after accounting for open S01s Computed: Days cover after typical S01 Safety stock and min required stock Coverage ratio and overdue ratio Created a two-axis risk grid : Impact (how bad it is if S01 hits) Likelihood (how soon S01 is expected again) Mapped to P1 / P2 / Info priorities that the client can easily interpret. Stateful alerting logic with throttling Stored last alert status and timestamps per SKU. Implemented different frequencies: Critical → Every 3 days Urgent → Every 7 days Recovery → One-time notification Avoided repeated alerts in short intervals. Performance optimization in KNIME Pruned unused columns early. Grouped and aggregated data before heavy joins. Modularized workflow sections (KPI, S01, Alerts) for clarity.
+
+Business Impact
+
+Reduced manual work: Earlier: Days of Excel work for each reporting cycle due to large amount of data. Now: single KNIME run →Automation &  Tableau refresh → insights in minutes. Single source of truth: All Amazon inventory, demand, and KPI metrics now flow into one master table and one dashboard , instead of scattered sheets. Better visibility into S01 risk: Client can clearly see which SKUs could break if another S01(Special Order) hits. Priority classification (P1/P2) helps them act fast on critical items. Smarter replenishment decisions: ROP, Safety Stock, EOQ, LTD, and forecast-based insights make PO planning more data-driven. Proactive risk management: Email alerts warn the team before stockouts happen. Recovery alerts confirm when issues are resolved. Stronger collaboration: Supply chain, operations, and leadership can all look at the same Tableau views and make faster, aligned decisions.
+
+Project Snapshots
+
+Final Output as Tableau Dashboard:

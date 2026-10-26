@@ -1,0 +1,35 @@
+MongoDB Atlas Data and Dashboard
+
+Client Background
+
+Client: A leading IT & Tech firm in Australia Industry Type: IT & Data Service Products & Services: Data Analysis Organization Size: 100+
+
+The Problem
+
+The  data was stored in Airtable, and we used its basic dashboards for visualizations embedded in our Noloco system. However, slow loading times affected performance. We needed an expert to migrate our data to MongoDB, recreate the dashboards, and ensure they load quickly within Noloco.
+
+Our Solution
+
+We migrated the data from Airtable to MongoDB Atlas, recreated the dashboards in MongoDB, and optimized them for fast loading. The new dashboards were embedded into Noloco, delivering a smoother and more responsive user experience.
+
+Deliverables
+
+Dashboard in MongoDB Atlas
+
+Tech Stack
+
+Tools used MongoDB Atlas Language/techniques used MongoDB Aggregate Pipeline Models used No model is used Skills used MongoDB Atlas, Data Analysis Databases used MongoDB Web Cloud Servers used No Web Cloud Servers used
+
+What are the technical Challenges Faced during Project Execution
+
+One of the main technical challenges we faced during the project was creating calculated fields when some necessary fields were missing. This made it difficult to complete the dashboard, as the visualizations couldn’t be fully built using aggregate pipeline inside chart panel editing
+
+How the Technical Challenges were Solved
+
+We solved the technical challenge by creating new collections in MongoDB Atlas that included the required fields. These fields were calculated from existing data and then used to build the visualization cards in the dashboard.
+
+Business Impact
+
+The migration to MongoDB Atlas and the optimized dashboards significantly improved performance and reliability. By embedding the new dashboards into Noloco, users now experience faster load times and smoother interactions, leading to better productivity and decision-making.
+
+Project Snapshots

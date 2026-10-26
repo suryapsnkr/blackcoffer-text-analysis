@@ -1,0 +1,21 @@
+Face Recognition with Deepfills Framework – Deepface
+
+Problem We aim to use DeepFace to perform various facial recognition tasks, including verifying identities in images, locating faces, and analyzing facial attributes (such as age, gender, race, and emotions) to derive insights.
+
+What is DeepFace Framework? DeepFace is a lightweight and powerful Python-based framework for facial recognition and facial attribute analysis. It supports tasks like verifying faces, identifying faces in an image, and analyzing attributes like age, gender, emotions, and race. DeepFace wraps around state-of-the-art facial recognition models to deliver accurate and efficient results. It is widely used for tasks involving identity verification, security, and biometric analysis.
+
+Method Used To analyze the images, we utilized the DeepFace framework. Specifically, we applied it to images of famous celebrities to extract facial features and gain insights from these images. The DeepFace framework allows us to:
+
+Verify whether two faces belong to the same person. Find and locate faces in images. Analyze facial attributes such as age, gender, race, and emotional expression.
+
+Models Used DeepFace operates as a hybrid framework, incorporating multiple leading facial recognition models, including:
+
+VGG-Face FaceNet OpenFace DeepFace DeepID ArcFace Dlib SFace GhostFaceNet
+
+These models enhance DeepFace’s versatility, allowing it to be used for both simple and complex facial recognition tasks.
+
+Solution We created a folder named “facedb” which contains images of two celebrities—Akshay and Kartik. Using the DeepFace framework, we performed the following tasks:
+
+Verification: We verified whether two images belong to the same individual. Finding Faces: We identified and matched similar faces using a reference image. Facial Attribute Analysis: We analyzed the images to determine the person’s age, gender, race, and emotional state.
+
+This solution allows for a comprehensive analysis of the faces within the dataset, leveraging the strengths of the DeepFace framework to extract meaningful insights.

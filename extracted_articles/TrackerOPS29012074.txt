@@ -1,0 +1,115 @@
+Transforming Modern Hiring with a Unified, Multi-Format Interview & Assessment Platform
+
+Client Background
+
+Client: A leading tech consutling in the USA
+
+Industry Type: IT & Consulting
+
+Products & Services: IT & Consulting
+
+Organization Size: 100+
+
+About the Client: The client is a growing HR-tech organization focused on improving end-to-end hiring efficiency for companies of all sizes. They work closely with recruitment teams, hiring managers, and industry experts to design structured assessment workflows that ensure fair, consistent, and skills-driven evaluations. With a strong emphasis on multi-format interviews—ranging from video responses to coding challenges—the client needed a scalable platform that simplifies assessment creation, centralizes candidate evaluations, and supports collaborative decision-making across hiring teams.
+
+Risalent Web App
+
+Risalent streamlines the hiring process with advanced interview and assessment solutions. Our platform helps organizations manage job postings, evaluate candidates through structured assessments and expert reviews, and collaborate as a team—empowering them to build high-performing teams efficiently. Whether hiring for executive roles, experienced professionals, or recent graduates, Risalent adapts to your hiring needs with precision.
+
+The Problem
+
+Interview management—especially involving multiple assessment types—can become fragmented and error-prone. We identified key pain points:
+
+Difficulty in managing and creating assessments seamlessly. Lack of reliable support for various question formats (video, written, MCQ, coding). The need for evaluators to access candidate responses in a structured, separate format. Ensuring smooth execution of coding questions across all user devices. Supporting multiple programming languages (JavaScript, Python, C++, Java) along with automated test case evaluation.
+
+Our Solution
+
+System Design & Planning
+
+Created a comprehensive user flow and entity-relationship diagram (ERD) . Took a brute-force-to-optimal approach for identifying pain points and improving the solution.
+
+Coding Assessment Execution
+
+Integrated Judge0 , a robust third-party code execution engine. Established secure and efficient API communication to execute code and run test cases reliably across devices and browsers Ensured support for multiple languages: JavaScript, Python, C++, Java . Built infrastructure to separate and organize responses by type (video, written, MCQ, coding) for easier evaluation.
+
+Solution Architecture
+
+Frontend (React.js)
+
+Dynamic interface for handling multiple assessment types: coding, video, MCQ, and written responses Integrated code editor with support for JavaScript, Python, C++, Java Live interview and video recording powered by Agora SDK Responsive UI optimized for desktop and mobile devices
+
+Backend (Node.js with Express)
+
+Handles authentication, role-based access (GCP IAM), session management, and API routing Manages assessment creation, storage, evaluation, and candidate tracking Interfaces with: Judge0 API for code execution and test case validation Agora API for managing live interviews and video recordings
+
+Database (MongoDB Atlas)
+
+Stores structured data including: Job listings, interview sessions, candidate responses, and evaluator feedback Relationships and aggregations to support analytics and role-based data access
+
+External Integrations
+
+Judge0 – Secure code execution for coding assessments Agora – Real-time video streaming and recording for live interviews GCP IAM – Role-based access control for secure user permissions
+
+Tech Stack
+
+Tools used Visual Studio Code – Development environment MongoDB Atlas – Managed NoSQL database Google Cloud Platform (GCP) – Cloud infrastructure and deployment
+
+Language/techniques used
+
+Node.js (Express) – Backend API and server logic JavaScript (React.js) – Frontend application and dynamic UI compone nts
+
+Skills used
+
+Full-Stack Web Development – Building robust, scalable web apps from end to end Cloud Deployment (GCP) – Hosting and managing the application on scalable cloud infrastructure Data Structures & Algorithm Optimization – Ensuring efficient performance in assessment evaluations
+
+Databases used
+
+MongoDB (via Atlas)
+
+Used for handling structured interview data Supports advanced queries, relationships, and aggregations to manage candidate responses and evaluation metrics Web Cloud Servers used
+
+Google Cloud Compute Engine – Hosts backend services and APIs MongoDB Atlas – Scalable cloud database with high availability GCP IAM (Identity and Access Management) – Enforces role-based access control (RBAC) for secure evaluator and candidate permissions Agora SDK – Powers real-time video recording and live interviews with low latency and global reliability
+
+What are the technical Challenges Faced during Project Execution
+
+Reliable Code Execution Across Devices Ensuring consistent performance of coding assessments (Python, JavaScript, C++, Java) across different browsers and devices. Handling Multiple Assessment Formats Integrating diverse question types (video, MCQ, written, coding) into a single, smooth user experience. Live Video Stability and Recording Maintaining stable live interviews with real-time video streaming and ensuring accurate recording and playback. Secure Role-Based Access Control Preventing unauthorized access while allowing flexible roles (candidate, evaluator, admin) across the system. Managing Concurrent Sessions Supporting multiple interviews and assessments happening simultaneously without backend bottlenecks. Scalability and Cloud Deployment Setting up a cloud environment that can scale, remain cost-effective, and support future growth.
+
+How the Technical Challenges were Solved
+
+Code Execution with Judge0 API Integrated Judge0 , a third-party code execution engine, to run and test code reliably across all supported languages and devices. Modular Assessment Components Designed reusable components for each question type (coding, MCQ, video, written), making the interface consistent and easy to maintain. Agora SDK Integration Used Agora for real-time video and recording, ensuring minimal latency and smooth performance in live interviews. GCP IAM for Secure Access Implemented Google Cloud IAM to manage user roles securely, ensuring only authorized users access sensitive data. Optimized Backend with Node.js + MongoDB Built a scalable backend that handles multiple sessions and stores all data efficiently using MongoDB Atlas with optimized queries and indexing. Cloud Hosting on GCP Compute Engine Deployed the backend on Google Cloud Compute Engine , allowing easy scaling and monitoring through GCP tools.
+
+Business Impact
+
+Faster, More Reliable Hiring Process Organizations can now run assessments and live interviews in one place, reducing time-to-hire and manual coordination. Improved Candidate Experience A smooth, responsive platform across devices leads to higher candidate satisfaction and fewer drop-offs during assessments. Scalability for Future Growth With GCP-based deployment and modular architecture, the system is ready to scale as client demand increases. Evaluator Efficiency Evaluators get organized, separate access to responses (video, written, coding, MCQ), enabling faster, more accurate decisions. Competitive Edge By offering an all-in-one, structured assessment tool with real-time video, Risalent provides a clear advantage over traditional hiring platforms.
+
+Project Snapshots
+
+1 .Home Page
+
+2.Listed Job
+
+3. Login screen
+
+4.Hiring manager dashboard
+
+5.Watch Interview
+
+6.Analytics section
+
+7.HR profile sections
+
+8 Candidate dashboard
+
+9.Candidate profile
+
+Project website url
+
+https://risalend.com
+
+Project Video
+
+https://www.loom.com/share/3abc7f73fa9e4e2db0cd62b7ed8e50a4?sid=fa6301fd-2217-46f0-b95c-6b3a3e34881e
+
+Contact Details
+
+This solution was designed and developed by Blackcoffer Team Here are my contact details: Firm Name: Blackcoffer Pvt. Ltd. Firm Website: www.blackcoffer.com Firm Address: 4/2, E-Extension, Shaym Vihar Phase 1, New Delhi 110043 Email: ajay@blackcoffer.com WhatsApp: +91 9717367468 Telegram: @asbidyarthy

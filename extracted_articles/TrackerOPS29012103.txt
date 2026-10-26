@@ -1,0 +1,37 @@
+Face Recognition Using DeepFace
+
+The Problem
+
+The client required an accurate system to recognize images of specific individuals from a known set of faces (Ajay Bidyarthy, Udit Narayan, and Aditya Narayan). The system needed to distinguish between these individuals and unknown faces.
+
+Our Solution
+
+We implemented a facial recognition system using DeepFace with the pre-trained VGG-Face model. The system processes input images, compares them with a database of known images, and identifies the person if they are a known match.
+
+Solution Architecture
+
+The architecture is built on Python with the DeepFace library. It consists of:
+
+Input & Image Processing : The system receives an image in JPG format. Feature Extraction : Using VGG-Face, facial features are extracted. Database Search : These features are compared to the known images of Ajay Sir, Udit Narayan, and Aditya Narayan stored in a local folder. Face Matching : If a match is found, the person is identified; otherwise, the face is marked as unknown.
+
+Deliverables
+
+A face recognition script using DeepFace. Known and unknown face testing setup. A solution that recognizes faces from test images.
+
+Tech Stack
+
+Tools used DeepFace OpenCV Matplotlib Language/techniques used Python Models used DeepFace VGG-Face model for face recognition Skills used Python Programming Machine learning Face recognition Databases used Local directory for storing known Faces & Testing Images
+
+What are the technical Challenges Faced during Project Execution
+
+Incorrect Image Recognition: Initially, the system was not able to distinguish between closely related faces (e.g., Udit Narayan’s Young Age face and Aditya Narayan). Empty DataFrames: Some images resulted in empty DataFrames, causing index errors.
+
+How the Technical Challenges were Solved
+
+Error Handling: Added checks for empty DataFrames to prevent errors when no face is detected. Trained model on more distinguishable images
+
+Business Impact
+
+The system provided the client with a reliable way to recognize specific individuals. This improved automation in their workflow and helped categorize images with high accuracy.
+
+Project Snapshots

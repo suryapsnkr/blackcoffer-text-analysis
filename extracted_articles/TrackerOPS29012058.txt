@@ -1,0 +1,153 @@
+Valued Stats MLB web scraper
+
+Client Background
+
+Client: Valued Stats Industry Type: Sports Analytics and Insights Products & Services: Provides Statistical Analysis and Insights on Sports. Data-driven betting tools, prediction dashboards, and advisory insights. Organization Size: 100+
+
+The Problem
+
+The client were manually pulling data from multiple websites (Rotowire, Baseball Reference, Fangraphs, Baseball Savant, CBS Sports, etc.) every day and making manual reports. This caused:
+
+Long hours of manual work everyday Frequent errors and missing games No single, unified dataset combining matchups, splits, advanced metrics, and actual outcomes No simple API or file-based interface that downstream tools (dashboards, LLM chatbots, partners) could consume
+
+They wanted a fully automated daily pipeline that could:
+
+Scrape all relevant MLB data from different public sources Merge and enrich the data into a single structured dataset Append actual performance and quality checks Generate ready-to-use daily reports in Google Drive (CSV/Sheets).
+
+Our Solution
+
+We built an end-to-end MLB Web Scraping & Prediction pipeline , fully automated on AWS:
+
+A scheduled Python workflow that runs every morning on an EC2 instance Multi-source scraping (Rotowire, Baseball Reference, Fangraphs, Baseball Savant, CBS Sports) A stepwise enrichment pipeline that outputs: Master enriched dataset with stats for batters and pitchers Daily overall summary report (top batters + vulnerable pitchers) Prediction report with Hit_Score & HR_Score and ranks Per-game matchup reports (one file per game) Pitcher actual performance report Overall Top Predictions across multiple categories (Hits, HRs, Strikeouts, Total Score)
+
+All outputs are automatically uploaded to date-stamped Google Drive folders , so analysts can work from Sheets/Excel without touching code.
+
+Solution Architecture
+
+Our solution is built as an automated daily pipeline that runs in the background and keeps everything up to date without manual effort.
+
+1. Data Ingestion & Enrichment
+
+Every game day, the system automatically:
+
+Collects MLB data from trusted public sources (lineups, starting pitchers, weather, player splits, advanced stats, and play-by-play). Combines all of this into one unified dataset for each game: Who is playing whom Which pitcher is facing which lineup Recent form of batters and pitchers Advanced metrics like power, contact quality, and hard-hit rates
+
+This entire process is driven by Python scripts running on a cloud server (AWS EC2) and uses tools like Selenium / Playwright only where needed to handle dynamic websites.
+
+Reporting & Predictions
+
+Once the data is enriched, the pipeline:
+
+Creates a daily summary report highlighting: Top batters to watch Pitchers who look vulnerable based on recent performance Applies a rule-based scoring logic to each batter: Generates simple scores for “chance to get a hit” and “chance to hit a home run” Ranks players so it’s easy to see who stands out Breaks everything down into per-game reports : One report per matchup (e.g., Team A vs Team B) Easy to read: home pitcher vs away batters, and vice versa
+
+All reports are automatically uploaded to Google Drive in a clear, date-wise folder structure so analysts can work directly in Google Sheets or Excel .
+
+Outcome Tracking & Validation
+
+On the next day, the system:
+
+Pulls actual results (hits, home runs and pitching performance) from reliable sources and the database Updates the previous day’s reports with “what actually happened” Uses play-by-play data from CBS Sports to cross-check deep-hit events with real home runs
+
+This helps the users quickly see:
+
+Which predictions did well Which players or patterns are consistently performing Where to refine strategy going forward
+
+Consolidated “Best Picks” View
+
+To make insights even easier:
+
+The system scans all prediction reports and filters only high-confidence picks Groups them into simple categories like: Top Hits Top Home Runs Top Strikeouts Top Total Score Produces one Overall Top Predictions sheet for the day
+
+This file acts as a single, high-level view of the best daily opportunities according to the model logic.
+
+Deliverables
+
+Automated MLB Web Scraping & Enrichment Pipeline (9+ Python scripts) Daily Date-Based Google Drive Folder Structure , e.g. 07/19/2025/ plus _prediction folder Final Enriched Datasets Complete_SCRAPED_DATA_WITH_SAVANT.csv (all stats combined) Daily Reports Overall summary report Hit/HR prediction report with ranks Per-game matchup reports CBS Sports deep-hit report (HR Y/N) Pitcher actual performance report Overall TOP Predictions report Database Integration for pulling actual hitter/pitcher stats Technical documentation & runbook detailing pipeline order, credentials, and troubleshooting
+
+Tech Stack
+
+Tools Used
+
+Python (pandas, NumPy, requests) Selenium + ChromeDriver BeautifulSoup Jina AI / Playwright (for protected sites) Google Drive & Google Sheets API (service account + OAuth) AWS EC2 (Linux) with cron scheduling Fuzzy matching (thefuzz)
+
+Languages / Techniques Used
+
+Python scripting Web scraping (static & dynamic pages, HTML comments) Data cleaning, joining, and enrichment Fuzzy string matching and normalization Timezone-aware scheduling (EST / IST) Google Workspace automation (Drive & Sheets uploads, formatting)
+
+Models Used
+
+Rule-based prediction model for: Hit_Score HR_Score Confidence scoring and ranking logic for “Top Predictions” per category.
+
+(Architecture is kept flexible to plug in ML models later.)
+
+Skills Used
+
+Data engineering & ETL pipeline design Web scraping under limitations (Cloudflare, dynamic tables, hidden HTML) Sports/statistics domain understanding (splits, LA, EV, HR/9) Cloud deployment & automation (Linux, cron, environment variables) Practical reporting & stakeholder-friendly delivery via Google Sheets
+
+Databases Used
+
+External / client database for storing and querying actual stats (batters, pitchers, games).
+
+Web Cloud Servers Used
+
+AWS EC2 instance: runs the entire scraping, enrichment, and reporting pipeline via scheduled jobs.
+
+What are the technical Challenges Faced during Project Execution:
+
+Anti-Bot Protection & Dynamic Pages Fangraphs and some other sources used Cloudflare and dynamic content that blocked standard scraping. Data Hidden Inside HTML Comments Baseball Reference daily tables sometimes moved inside HTML comments, breaking naïve parsers. Inconsistent Player Names & Team Labels Variations in spelling, accents, initials, and team naming conventions across different sites. Finding Pitchers’ Last Outing Correctly Required scanning multiple days of pitching logs to find the exact outing with G = 1 for the correct team. Google Drive Folder Structure & Latest Data Detection Had to differentiate between plain date folders vs _prediction folders and ensure we always picked the latest folder with valid content . Aggregating High-Confidence Predictions Across Many Files Multiple prediction sheets per day needed to be merged and deduped while filtering by confidence threshold. Delivering Analyst-Friendly Sheets Needed consistent formatting (frozen headers, auto column-width, clear tab names) without manual editing every day.
+
+How the Technical Challenges were Solved
+
+Bypassing Anti-Bot Limits
+
+Used Jina AI and Playwright-based browsing for Fangraphs, along with Selenium for pages like Baseball Savant that require JavaScript rendering.
+
+HTML Comment Parsing
+
+Implemented logic to detect when target tables were moved into comments and parse them using BeautifulSoup after extracting comment contents.
+
+Standardized Name & Team Normalization
+
+Created helper functions and mapping dictionaries to normalize player names and team names, then used fuzzy matching as a second layer to match edge cases.
+
+Robust Pitcher Last-Outing Search
+
+Designed a loop across daily pitching pages (1 to N days back), stopping at the first row where G = 1 for the specific pitcher/team pairing and saving those stats.
+
+Strong Drive Folder Logic
+
+Added utilities to: List and sort folders based on parsed date strings Check if mandatory columns exist before treating folder as “ready” Cleanly handle no-data or partial-data scenarios
+
+Smart Aggregation for Top Predictions
+
+Only rows with confidence >= 70 are kept. Grouped by prediction category and sliced to top N. Final “Overall TOP Predictions” Sheet acts as the single source for daily best picks.
+
+Automated Sheet Formatting
+
+While uploading CSVs, APIs are used to: Freeze first row Apply header styling Auto-resize columns Name sheets clearly (“Pitcher Actual Performance Report”, “Overall TOP Predictions” etc.)
+
+Business Impact
+
+Huge Time Savings:
+
+Manual scraping and Excel work (~1–2 hours per day) is now replaced by an automated EC2-run pipeline.
+
+Higher Data Quality & Coverage:
+
+Data from 5+ sources is now consistently merged into a single dataset, significantly reducing missing players/matchups.
+
+Better Daily Decision Support:
+
+Analysts and decision-makers start each day with: Clean summary report Ranked prediction report Per-game breakdowns Validation using actual outcomes and CBS deep-hit tags
+
+New Insight Products:
+
+Users can now offer “Top Daily Predictions” and “Pitcher Risk” style insights to downstream consumers based purely on the generated reports.
+
+Future Readiness:
+
+The pipeline and schemas are ready for plugging in ML models or other sports with minimal architectural changes.
+
+Project Video:
+
+URL: https://app.screencastify.com/watch/RfeCvEJAne0m5kbSGJu1?checkOrg=417e25bd-dc0b-4f85-a09c-e9e24cf6aef2

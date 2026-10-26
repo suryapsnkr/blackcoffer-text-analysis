@@ -1,0 +1,75 @@
+Streamlining Broodmare & Stallion Data Management with Fast, Role-Based, and Scalable Reporting
+
+Client Background
+
+Client: A leading tech firm in the USA
+
+Industry Type: IT & Consulting
+
+Products & Services: IT Services
+
+Organization Size: 100+
+
+The Problem:
+
+Handling slow processing and large data sets during Broodmare Sales Report generation. Managing complex horse genealogy with deep relational data. Lack of admin role-based operations and controls. No existing system for managing and reporting Global Stallions data. No easy way to generate, download, or track pedigree and sales reports, especially in PDF format. Broodmare Report generation was tedious, with poor integration between frontend and backend. Managing complex horse lineage and multi-generation data efficiently.
+
+Slow performance while generating Broodmare Sales Reports due to heavy datasets. Lack of an admin interface for controlling and managing Global Stallions and related operations. No system for tracking , generating , or downloading pedigree and sales reports dynamically. Need to filter horse data (like existence basis) and generate reports based on multiple dynamic conditions. PDF generation and storage handling for large reports were missing. Role-based access was not implemented — admin and users had no separated privileges. Need for dynamic filtering, fast data queries, and role-specific report access.
+
+Our Solution:
+
+Designed a Vue.js frontend with dynamic components for Horse details, Global Stallions management, and Broodmare reports.
+
+Modeled horse pedigree using Neo4j for faster graph traversal and deep generation lineage extraction. Built Django RESTful APIs to handle backend operations like data fetching, updates, PDF generation, and cloud storage interaction. Implemented role-based authentication and authorization to allow only admins to access sensitive operations. Created a Global Stallions admin module: add, edit, delete, view stallions with full integration between frontend and backend. Integrated Google Cloud Platform (GCP) for file storage, and Vertex AI to optimize PDF processing. Developed Cloud Run services to generate heavy Broodmare Sale Reports asynchronously to solve performance issues. Built a report history tracking system to maintain and fetch user-specific reports.
+
+Solution Architecture:
+
+Frontend (Vue.js)
+
+↓
+
+Backend (Django APIs)
+
+↓
+
+Graph Database (Neo4j) for horse relationships
+
+↓
+
+Cloud Functions / Cloud Run (GCP) for heavy report generation
+
+↓
+
+Cloud Storage (GCP Buckets) for storing PDFs
+
+↓
+
+Vertex AI for optimized PDF generation
+
+Neo4j: Horse pedigree and lineage storage Django: API server and authentication handling Vue.js: Frontend component-driven UI GCP Storage: PDF and report storage Cloud Run: Async processing of large reports Vertex AI: Document generation and optimization
+
+Deliverables:
+
+Horse Details and HorseTablePedigree Components
+
+Broodmare Report Generation Module Broodmare Sales Report Generation Module Global Stallions Admin Module Broodmare Report History Tracking System Full Role-Based Access (Admin/Normal User) Backend APIs for CRUD operations, report generation, and PDF downloads Frontend-Backend full integration GCP Storage and Cloud Run setup Testing and Validation of all critical modules
+
+Tech-Stack Used:
+
+Layer Technology Frontend Vue.js Backend Django (Python) Database Neo4j (Graph Database) Cloud GCP (Cloud Storage, Cloud Run) AI Services Vertex AI APIs Django REST Framework
+
+Technical Problems Faced:
+
+Handling Multi-Generation Data : Slow queries for 3rd/6th generation pedigrees. Slow Report Generation : Broodmare Sale Report was slow due to massive data size. Missing Admin Role Verification : Needed strict user access control. Global Stallions Management Complexity : No prior structure existed. PDF Report Size Management : Large size of pedigree and sales PDFs. Frontend-Backend Integration Challenges : Real-time feedback and updates were tricky. Efficient Report Storage and Access : Storing large reports securely and providing download links dynamically.
+
+How Technical Problems Were Solved:
+
+Multi-Generation Data Queries : ➔ Used Neo4j’s Cypher queries to retrieve generations efficiently using graph traversal techniques. Slow Report Generation : ➔ Offloaded the Broodmare Sale Report generation to GCP Cloud Run , making the process asynchronous and independent of frontend wait times. Role-Based Access : ➔ Implemented Django-based permission classes to restrict admin operations and verify user roles before performing any CRUD operation. Global Stallions Management : ➔ Built a full-featured admin tab in Vue.js with a dedicated modal for adding Global Stallions and API endpoints for database management. Large PDF Handling : ➔ Used Vertex AI Document Generation models to generate lightweight, optimized PDFs, minimizing size without compromising detail. Frontend-Backend Communication : ➔ Integrated REST APIs with structured error handling, loading states, and real-time success notifications for better user experience. Storage & Secure Access : ➔ Uploaded all generated PDFs to GCP Storage Buckets and retrieved download links dynamically through secure API calls.
+
+Business Impact:
+
+80% Faster Report Generation : Async processing through Cloud Run drastically reduced report generation waiting times. Enhanced User Experience : Admins and users could now independently manage horses, stallions, and reports via easy UI workflows. Accurate and Scalable Data Handling : Neo4j provided a scalable way to handle complex horse pedigrees up to 6 generations deep. Secure and Role-Based Access : Minimized risks by allowing only authorized users to perform critical operations. Revenue Growth Opportunities : Global Stallions management opened the door for broader horse sale tracking and breeding analytics. Cloud-Centric Scalability : GCP integration enabled handling of large report storage and scalable backend processing, future-proofing the application. Reduced Manual Workload : Automated PDF generation, storage, and report history tracking saved many man-hours.
+
+Contact Details
+
+This solution was designed and developed by Blackcoffer Team Here are my contact details: Firm Name: Blackcoffer Pvt. Ltd. Firm Website: www.blackcoffer.com Firm Address: 4/2, E-Extension, Shaym Vihar Phase 1, New Delhi 110043 Email: ajay@blackcoffer.com WhatsApp: +91 9717367468 Telegram: @asbidyarthy

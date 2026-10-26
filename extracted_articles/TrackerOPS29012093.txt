@@ -1,0 +1,49 @@
+Infrastructure Automation
+
+Client Background
+
+Client:  A leading IT & tech firm in Europe
+
+Industry Type: IT & services
+
+Products & Services: IT services
+
+Organization Size: 200+
+
+The Problem
+
+The client needed a fully automated and cost-effective infrastructure setup for a larger data analytics platform that includes historical and incremental ETL processes. The goal was to set up tools like Docker, Terraform, dbt Core, Apache Airflow, and Bitbucket using free-tier services and Infrastructure-as-Code (IaC). The solution needed to be scalable, maintainable, and well-documented for handover and collaboration.
+
+Additionally, they required automation scripts to spin up and shut down infrastructure (e.g., EC2, RDS) daily to avoid unnecessary cost, a Bitbucket CI/CD pipeline, and Terraform integration for seamless deployment.
+
+Our Solution
+
+We developed a streamlined infrastructure using Terraform, integrated it with Bitbucket Pipelines, and provisioned a Docker-ready EC2 instance to host key tools. We ensured that the environment supports Airflow orchestration, dbt transformations, and SQL-based ETL workflows.
+
+We documented installation, configuration, and costing for all tools. We also created a walkthrough and basic automation scripts to control instance uptime, and a ready-to-use Terraform backend setup.
+
+Solution Architecture
+
+Deliverables
+
+Terraform-based infrastructure setup Docker-based deployment environment Airflow and dbt Core installation Bitbucket CI/CD pipeline setup Documentation with installation steps and costing EC2 spin-up/spin-down automation script IAM roles and access policy requirements Architecture & system design diagrams Client walkthrough and support
+
+Tech Stack
+
+CATEGORY TOOLS / TECHNOLOGIES Tools used Docker, Terraform, Apache Airflow, Bitbucket, dbt Core Languages/Techniques Python, SQL, YAML (Pipelines), Shell Scripts Models used n/a (infra setup only) Skills used DevOps, Cloud Infrastructure, IaC, CI/CD, Documentation Databases used PostgreSQL (via RDS ) Web Bitbucket Pipelines Cloud Servers used AWS EC2 (Ubuntu 22.04), planned S3 + RDS + MSK
+
+What are the technical Challenges Faced during Project Execution
+
+Designing cost-effective infrastructure using only AWS free-tier services Setting up Terraform backend and IAM roles with appropriate permissions Ensuring Docker, Airflow, and dbt run seamlessly on a single EC2 instance Lack of pre-existing documentation or templates from the client side Synchronizing Bitbucket Pipelines with Terraform deployment logic
+
+How the Technical Challenges were Solved
+
+Used t2.micro and t2.large instances with scheduled shutdown to optimize AWS cost Created custom IAM roles and policy list for Terraform provisioning Used Docker Compose to manage Airflow and dbt containers efficiently Provided modular Terraform templates and comments for future flexibility Designed spin-up/shut-down shell scripts for EC2 to help avoid idle costs Documented every setup with screenshots, costing, licensing, and OS details
+
+Business Impact
+
+Reduced infrastructure deployment time by 70% using Terraform automation Saved ~40% on AWS costs by enforcing EC2 stop policies outside working hours Enabled the client to replicate the setup in other environments easily Improved collaboration through version-controlled infrastructure in Bitbucket Positioned the client for seamless ETL integration with Airflow and dbt workflows
+
+Contact Details
+
+This solution was designed and developed by Blackcoffer Team Here are my contact details: Firm Name: Blackcoffer Pvt. Ltd. Firm Website: www.blackcoffer.com Firm Address: 4/2, E-Extension, Shaym Vihar Phase 1, New Delhi 110043 Email: ajay@blackcoffer.com WhatsApp: +91 9717367468 Telegram: @asbidyarthy

@@ -1,0 +1,25 @@
+AI-Driven Regional Demand Forecasting for Residential Gutter Systems
+
+Client Background
+
+Client: A leading Construction Technology firm in the USA Industry Type: Home Improvement and Construction Products & Services: IT services and Software Solution Organization Size: 200+
+
+The Problem
+
+Accurately forecasting the demand for new gutter systems in residential homes is a significant challenge for roofing companies. Without reliable predictions, businesses risk understocking or overstocking materials, resulting in lost revenue opportunities or excessive inventory costs. Furthermore, demand can vary widely across different states and zip codes due to factors such as climate, housing density, and economic conditions, making it difficult to create a one-size-fits-all prediction model. Limited internal data from 2023 expenditure alone is insufficient to capture these complex regional variations and temporal factors influencing customer needs.
+
+Our Solution
+
+To address this challenge, we developed a machine learning model that forecasts the demand for new gutter systems across residential homes in the United States for the year 2024. The model integrates the roofing company’s 2023 expenditure data with publicly available datasets, including weather data from GSOD/NOAA and housing information from LIRA/IPUMS. By combining these diverse data sources, the model captures underlying patterns and factors influencing gutter replacement needs, such as climate impact and housing demographics.
+
+Solution Architecture
+
+Our solution architecture is built around a data-driven machine learning pipeline that begins with comprehensive data integration. We first preprocess the roofing company’s expenditure data, cleaning and normalizing it to ensure consistency. Next, we integrate multiple external datasets such as weather records from GSOD/NOAA and housing characteristics from LIRA and IPUMS. This multi-source data fusion allows us to create a rich feature set aligned with regional and temporal patterns affecting gutter demand.
+
+Tech Stack
+
+Tools used Jupyter Notebook Language/techniques used Python Models used classification model, clustering model Skills used Machine learning
+
+What are the technical Challenges Faced during Project Execution
+
+One of the major technical challenges was accurately predicting the demand for gutter systems using the limited 2023 expenditure dataset from the roofing company. The dataset alone did not fully capture the wide range of factors influencing gutter replacement needs across different regions, making it difficult to develop a robust predictive model. This scarcity of data posed challenges around model generalization and risked overfitting to historical patterns that might not hold in future periods

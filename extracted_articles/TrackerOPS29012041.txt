@@ -1,0 +1,85 @@
+Feature Engineering for Cyberattack Detection in Water Treatment Systems
+
+Client Background
+
+Client : A leading Cybersecurity firm in the USA Industry Type : Industrial Control Systems / Critical Infrastructure Products & Services : Water Desalination & Treatment Plants Organization Size : 100+
+
+The Problem
+
+The client possessed a labeled dataset (SWaT_Dataset_Attack_v0.xlsx) containing time-series data collected from sensors and devices in a water treatment facility. The data captured operational states and attack states but was raw and unsuitable for direct input into deep learning models. The client needed help extracting statistical features (like periodicity, entropy, kurtosis, skewness , etc.) from the device-level time series to prepare the data for a Graph Neural Network (GNN) –based classification model.
+
+Our Solution
+
+We developed a robust feature extraction pipeline in Python that:
+
+Loaded and cleaned the dataset. Extracted device-level statistical features such as mean, standard deviation, skewness, kurtosis, entropy , and frequency-domain features . Scaled the data using MinMaxScaler and applied dimensionality reduction (via PCA). Engineered a final structured dataset where: Each row represented a device instance , Columns held extracted features , And the final column was a binary attack label .
+
+Solution Architecture
+
+Deliverables
+
+  Cleaned and preprocessed dataset with statistical features.
+
+  Feature extraction Python script with comments and explanations.
+
+  Final Excel output:
+
+First column: Device names Intermediate columns: Extracted features Last column: Attack labels
+
+  Visual charts showing feature distributions and correlations.
+
+  Documentation of formulas and steps used for feature generation.
+
+Tech Stack
+
+ Tools used
+
+Jupyter Notebook MS Excel
+
+ Language/techniques used
+
+Python (Pandas, NumPy, Scipy, Scikit-learn) Data normalization, statistical aggregation Dimensionality reduction (PCA)
+
+ Models used
+
+Not applicable (Feature Engineering phase only)
+
+ Skills used
+
+Data Cleaning, EDA, Time-series feature extraction, Data transformation
+
+ Databases used
+
+Excel input/output datasets (local files)
+
+ Web/Cloud Servers used
+
+Executed locally and shared securely with client via Google Drive
+
+What are the technical Challenges Faced during Project Execution
+
+  Handling non-uniform device naming and misaligned timestamps.
+
+  Detecting meaningful periodicity within short time windows.
+
+  Differentiating normal vs attack behavior using statistical properties alone.
+
+How the Technical Challenges were Solved
+
+  Developed device-mapping and renaming routines.
+
+  Applied Fourier Transform and Autocorrelation for periodicity analysis.
+
+  Used class-wise EDA to observe separability via correlation and distribution plots.
+
+  Applied feature selection using SelectKBest and RFE to choose meaningful attributes.
+
+Business Impact
+
+  Accelerated client’s ability to build a Graph Neural Network model with better input representations.
+
+  Delivered plug-and-play feature extraction logic that can be reused for other SCADA systems.
+
+  Reduced noise and dimensionality in the raw dataset, improving downstream model performance.
+
+Project Snapshots

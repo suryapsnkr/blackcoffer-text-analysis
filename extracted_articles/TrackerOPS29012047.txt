@@ -1,0 +1,51 @@
+Airbyte Connectors
+
+Client Background
+
+Client: A leading tech firm in the USA Industry Type: IT Products & Services: AI for Businesses Organization Size: 100+
+
+The Problem
+
+Client wanted to have a custom connector built via Airbyte which they could self host, to bring data from external sources (ShipBob, ShipStation, Tiktok shop etc) to have a pipeline built, for syncing data at regular intervals.
+
+Our Solution
+
+We proposed the solution of developing custom connectors via Airbyte’s python CDK
+
+Solution Architecture
+
+Use of Airbyte’s python CDK to build custom connectors with Oauth libraries for authentication, poetry and conda for managing dependencies.
+
+Deliverables
+
+Built Docker image using dockerfile, pushing it to a dockerhub repository and loading the connector from there. The said dockerfile could be used to build image and hosted in AWS ECR too.
+
+1) We’ve added Products and Returns stream.
+
+2) Incremental sync for products using a timestamp based cursor field “created_date” and it’s working well. There are no date based query parameters for this stream so used this timestamp field from API response
+
+3) Incremental sync for orders stream using “StartDate” as a query parameter instead of “LastUpdateStartDate”. We followed the video you sent and were able to create orders,  products and inventories but there is no PUT method in the API documentation to edit the existing orders.
+
+4) Full refresh of Inventory stream
+
+Tech Stack
+
+Tools used VSCode, GCP VM, Docker Desktop, Insomnia Language/techniques used Python Skills used Python, Airbyte CDK, GCP VM, Docker Databases used No database used (Client handled that) Web Cloud Servers used GCP
+
+What are the technical Challenges Faced during Project Execution
+
+We had to discard the initial approach we followed after RnD for making a custom connector via Airbyte CDK in a flask application.
+
+How the Technical Challenges were Solved
+
+We proposed the solution of Airbyte’s python CDK which could work well in Client’s hosted setup too
+
+Business Impact
+
+Client could sync data from their customer’s inventories, via our airbyte connector at regular intervals or even manually based on different endpoints (Order, Products, Returns etc)
+
+Project Snapshots
+
+Project Video
+
+https://www.loom.com/share/7fd83fc014e94d8c9872732241aa8f8e

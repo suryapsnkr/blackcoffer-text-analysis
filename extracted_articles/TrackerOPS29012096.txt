@@ -1,0 +1,223 @@
+Almalinux Server Administration
+
+Client Background
+
+Client:  A leading IT & tech firm in the USA
+
+Industry Type: IT & services
+
+Products & Services: https://www.nevolvis.ch/
+
+Organization Size: 100+
+
+The Problem
+
+The client faced difficulties accessing the AlmaLinux server operating system to install any tools beyond terminal-based access and for deploying applications on the Linux OS. Additionally, the client wanted to containerize their application, which included:
+
+A frontend built with HTML, JavaScript, etc. A backend developed in Python with Django. Databases, including PostgreSQL and a vector database.
+
+Our Solution
+
+We assisted the client in connecting to the server using Webex for remote collaboration and Bitvise for terminal access. Additionally, we helped containerize the frontend, backend, and database applications. To simplify deployment for developers, we structured the application into separate Docker containers, transforming each component into an individual microservice.
+
+Solution Architecture
+
+Deliverables
+
+Server Setup & Administration
+
+Configured AlmaLinux server for optimal performance and security. Set up Docker and Docker-Compose for application containerization. Managed server security settings, including Nginx configuration updates and TLS/SSL implementation.
+
+Application Deployment & Management
+
+Deployed multiple application versions on the server, including frontend, backend, and databases. Automated deployment using Azure DevOps and GitHub Actions. Migrated applications to a microservices architecture using Docker. Updated Nginx configurations to support different applications and improve security. Resolved Milvus vector database issues (installation, TLS setup, disk space management).
+
+Database Administration
+
+Set up and configured PostgreSQL and Milvus vector databases. Tested and secured database access, including restricted access policies. Resolved issues related to database connectivity, SSL, and performance tuning.
+
+Infrastructure Automation & Monitoring
+
+Developed and tested shell scripts to automate deployment and database configurations. Implemented server monitoring and logging solutions to track system health. Created an automated pipeline in Azure DevOps to streamline deployments.
+
+Documentation & Knowledge Sharing
+
+Created detailed technical documentation for server setup, deployment, and database management. Documented Azure DevOps pipeline setup and testing process. Provided code reviews and suggestions for the Main_app_nev_bot project. Conducted meetings with the development team to discuss architecture improvements and deployment plans.
+
+Client Collaboration & Support
+
+Conducted multiple meetings with the team and client to address concerns, including: Azure DevOps integration and branch management. Milvus database access restrictions and security improvements. Nginx configuration adjustments for iframe embedding and security policies. Assisted in troubleshooting application and infrastructure-related issues.
+
+Tech Stack
+
+Tools & Platforms Used
+
+Docker & Docker-Compose – Containerization of applications Azure DevOps – CI/CD pipeline automation and repository management GitHub Actions – Automated application deployment Bitvise SSH – Secure server access and management Webex – Remote collaboration and client communication pgAdmin – PostgreSQL database management
+
+Languages & Frameworks
+
+Frontend: HTML, JavaScript Backend: Python (Django framework) Database Query Language: SQL (PostgreSQL), NoSQL (Milvus Vector Database) Scripting: Bash (for automation & deployment scripts)
+
+Databases
+
+PostgreSQL – Relational database for structured data Milvus Vector Database – Used for AI/ML-powered search and indexing
+
+Infrastructure & Cloud Services
+
+AlmaLinux Server – Hosting applications and databases Nginx – Reverse proxy and web server configuration TLS/SSL Certificates – Security for HTTPS connections SharePoint (Azure) – Document management and sharing
+
+DevOps & Security
+
+Azure DevOps Pipelines – CI/CD automation for deployments Shell Scripting – Automating server management tasks NGINX Security Configurations – Implementing Content Security Policy (CSP) and X-Frame-Options for secure embedding
+
+What are the technical Challenges Faced during Project Execution
+
+Complex Docker Configuration
+
+Containerizing a full-stack application (frontend, Django backend, PostgreSQL, and Milvus vector database) required careful setup to ensure inter-container communication and network security. Issues occurred while building and linking containers via `docker-compose`, especially in setting up persistent volumes, ports, and shared environments.
+
+Milvus Vector Database Integration
+
+Setting up Milvus was challenging due to its resource demands and configuration requirements. Issues related to disk space, vector indexing, TLS configuration, and Docker compatibility needed to be addressed.
+
+TLS & SSL Certificate Configuration
+
+Implementing TLS for both the web server and databases (especially Milvus) required generating and configuring certificates correctly across different services. SSL connectivity problems emerged when enabling secure connections for PostgreSQL and Milvus.
+
+Nginx Configuration & Security Policies
+
+There were issues embedding the chatbot in an iframe due to CSP (Content Security Policy) and X-Frame-Options headers. Updating the NGINX configuration without affecting existing services or breaking subdomains (like demo, finance, CRM) required precision and testing.
+
+CI/CD Pipeline Setup & Troubleshooting
+
+Automating deployments using Azure DevOps pipelines faced delays due to YAML misconfigurations, environment variable management, and compatibility with Dockerized apps. Initial pipeline builds failed to trigger proper server deployments, requiring debugging and restructuring.
+
+Database Access Management
+
+Implementing restricted access policies for PostgreSQL and Milvus databases was critical but complex, especially when multiple apps needed different levels of access. Testing database access securely within the application added extra layers of complexity.
+
+Codebase & Repo Management in Azure DevOps
+
+Coordinating code versions, managing branches, and syncing repositories across frontend, backend, and database microservices created challenges in consistency and version control.
+
+Limited Documentation & Resource Availability
+
+Sparse official documentation for certain tools (e.g., Milvus TLS setup or integration with Django) led to increased R&D time and testing.
+
+Performance Optimization & Resource Allocation
+
+Balancing container resource usage and resolving high memory/disk consumption issues (especially by Milvus) on a single AlmaLinux server required careful monitoring and tuning.
+
+How the Technical Challenges were Solved
+
+Complex Docker Configuration
+
+✅ Solution:
+
+Created modular `docker-compose.yml` files to define services (frontend, backend, PostgreSQL, Milvus) clearly. Used Docker networks and volumes to ensure proper communication and data persistence between containers.
+
+Milvus Vector Database Integration
+
+✅ Solution:
+
+Studied Milvus documentation and implemented it using Docker with correct dependencies. Configured TLS certificates and tested Milvus with secure endpoints. Optimized storage by allocating separate volumes and increasing disk space allocation as needed.
+
+TLS & SSL Certificate Configuration
+
+✅ Solution:
+
+Implemented Let’s Encrypt certificates and properly configured NGINX to serve apps over HTTPS. Set up SSL parameters in database config files and tested connections using tools like `psql` and pgAdmin.
+
+Nginx Configuration & Security Policies
+
+✅ Solution:
+
+Updated the NGINX configuration to allow iframe embedding by adjusting CSP headers and removing conflicting `X-Frame-Options`. Tested configurations with browser tools and ensured no conflict with existing apps (like CRM, finance, and chatbot).
+
+CI/CD Pipeline Setup & Troubleshooting
+
+✅ Solution:
+
+Created and tested Azure DevOps YAML pipelines and later documented them. Ensured proper artifact handling, build triggers, and secure credential storage for production deployment. Used GitHub Actions for AWS deployments where needed.
+
+Database Access Management
+
+✅ Solution:
+
+Implemented role-based access controls in PostgreSQL and restricted user privileges. For Milvus, configured secure endpoints with limited access, tested within containers using Django settings.
+
+Codebase & Repo Management in Azure DevOps
+
+✅ Solution:
+
+Regularly synced with the team for code reviews, merge strategy discussions, and issue resolution meetings. Created separate branches for each microservice to avoid merge conflicts and maintain code clarity.
+
+Limited Documentation & Resource Availability
+
+✅ Solution:
+
+Conducted independent R&D, followed GitHub issues, and referred to community forums. Documented all findings and created internal guides for the team to speed up future deployments.
+
+Performance Optimization & Resource Allocation
+
+✅ Solution:
+
+Used Docker resource limits to manage memory and CPU usage. Implemented monitoring tools to track container health. Identified bottlenecks and refactored configurations (e.g., caching, query optimization) to improve performance.
+
+Business Impact
+
+Streamlined Deployment Workflow
+
+The implementation of Docker and Azure DevOps pipelines significantly reduced manual deployment time and errors. Developers now deploy updates seamlessly using automated CI/CD workflows, leading to faster release cycles.
+
+Improved Scalability and Modularity
+
+By converting the application into microservices (frontend, backend, database), the client gained the flexibility to scale or update individual components without affecting the entire system.
+
+Enhanced Application Security
+
+TLS/SSL integration for the NGINX server and database connections ensured secure communication, safeguarding sensitive data. Database access control and role-based restrictions further protected application data integrity.
+
+Better Collaboration and Transparency
+
+Through tools like Bitvise and Webex, the development and DevOps teams were able to collaborate in real-time with the client, enabling quicker decision-making and troubleshooting.
+
+Reliable System Monitoring and Maintenance
+
+Monitoring scripts and container health checks allowed for quick detection and resolution of issues, ensuring application availability and reducing downtime.
+
+Reduced Infrastructure Complexity
+
+Dockerization abstracted away underlying system dependencies, making it easier to replicate environments, move between servers, and reduce configuration-related bugs.
+
+Documentation and Knowledge Sharing
+
+All setup and deployment processes were documented, improving team onboarding and reducing the knowledge gap for future developers or DevOps engineers.
+
+Support for Future Expansion
+
+With a solid, scalable foundation using AlmaLinux, Docker, and DevOps practices, the client is now well-positioned to expand their infrastructure or onboard new applications without major architectural changes.
+
+Project Snapshots
+
+Dashboard:
+
+File Upload:
+
+Select File:
+
+Ask question to chatbot based on the uploaded file details and answer:
+
+Project website url
+
+Application URL: https://datasuite.nevolvis.ch/
+
+This is the live application deployed on the AlmaLinux server. It includes a microservices-based architecture with a Dockerized frontend, Django backend, PostgreSQL, and Milvus vector database. All services are securely deployed and managed through automated CI/CD pipelines.
+
+Project Video
+
+Watch the project walkthrough here: https://www.loom.com/share/824ecfa9f8994ffbaa7c19a8af1e31ef?t=197&sid=be81b43c-7792-4b66-830b-cc59eccf8985
+
+Contact Details
+
+This solution was designed and developed by Blackcoffer Team Here are my contact details: Firm Name: Blackcoffer Pvt. Ltd. Firm Website: www.blackcoffer.com Firm Address: 4/2, E-Extension, Shaym Vihar Phase 1, New Delhi 110043 Email: ajay@blackcoffer.com Skype: asbidyarthy WhatsApp: +91 9717367468 Telegram: @asbidyarthy

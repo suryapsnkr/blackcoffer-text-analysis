@@ -1,0 +1,71 @@
+AI Workflow automation in Make.com
+
+This document outlines the architecture, setup, and usage of a Make.com scenario that automates the summarization of customer feedback submitted via a Google Form, using Hugging Face’s Inference API, and sends the summarized feedback via Gmail. The solution is designed to operate within the free tiers of Make.com, Hugging Face, and Gmail.
+
+Solution Overview
+
+The workflow automates the process of collecting feedback, summarizing it with AI, and emailing the results. It integrates:
+
+Google Forms : Captures customer feedback. Hugging Face Inference API : Summarizes feedback using the facebook/bart-large-cnn model. Gmail : Sends an email with the original feedback and its summary. Make.com : Orchestrates the automation.
+
+Objectives
+
+Detect new feedback submissions in real-time. Summarize feedback using a free AI model. Email the original feedback and summary to a specified recipient. Operate within free tier limits to minimize costs.
+
+Architecture Diagram
+
+Setup Instructions
+
+Step 1: Configure Google Form
+
+Go to Google Forms and create a form titled “Customer Feedback.” Add two questions: Question 1 : “Name” (Short answer text). Question 2 : “Please share your feedback about our service” (Paragraph). Save the form and test by submitting a sample response (e.g., Name: “John Doe,” Feedback: “The service was great, but the wait time was too long.”).
+
+Step 2: Set Up Make.com Scenario
+
+Log in to Make.com and create a new scenario named “Feedback Summarization Workflow.” Click the “+” button to add the first module.
+
+Step 3: Add Google Forms Trigger
+
+Module : Google Forms – Watch Responses Configuration : Connect your Google account. Select the “Customer Feedback” form. Set the trigger to detect new responses. Test : Submit a test response to confirm the module captures the name (e.g., {{1.2}}) and feedback (e.g., {{1.1}}).
+
+Step 4: Extract Feedback Text
+
+Module : Google Forms – Get a Response Configuration : Connect your Google account. Select the “Customer Feedback” form. Map the response ID from the previous module (e.g., {{1.responseId}}). Select the fields: “Name” and “Please share your feedback about our service.” Output : Name (e.g., “John Doe”) and feedback text (e.g., “The service was great, but the wait time was too long.”).
+
+Step 5: Summarize Feedback with Hugging Face
+
+Module : HTTP – Make a Request Configuration : URL : https://api-inference.huggingface.co/models/facebook/bart-large-cnn Method : POST Headers : Authorization: Bearer {{your_hugging_face_api_token}} (replace with your token from Hugging Face). Content-Type: application/json Body Type : Raw Content Type : JSON Request Content : { “inputs”: “{{2.feedback_text}}”, “parameters”: { “max_length”: 100, “min_length”: 30, “do_sample”: false }
+
+}
+
+Map {{2.feedback_text}} to the feedback text from Step 4 (e.g., {{2.1}}).
+
+Output : JSON response with the summary (e.g., [{“summary_text”: “Great service but long wait times.”}]).
+
+Step 6: Parse Hugging Face Response
+
+Module : JSON – Parse JSON Configuration : JSON String : {{3.body}} (HTTP response body from Step 5). Output : Summary text (e.g., {{4.summary_text}}).
+
+Step 7: Send Email with Gmail
+
+Module : Gmail – Send an Email Configuration : Connect your Google account. To : Your email address (e.g., yourname@gmail.com). Subject : Feedback Summary of {{1.2}} {{1.2}} maps to the name from the trigger (e.g., “John Doe”). Content : Name: {{1.2}} Feedback: {{1.1}}
+
+The summary of the Feedback text is: {{4.summary_text}}
+
+{{1.2}}: Name from the trigger. {{1.1}}: Feedback text from the trigger. {{4.summary_text}}: Summary from Step 6.
+
+Output : An email sent to the specified address with the name, feedback, and summary.
+
+Usage Instructions
+
+Submit Feedback : Access the Google Form and submit a response (e.g., Name: “Jane Smith,” Feedback: “Friendly staff, but the product was overpriced.”). Scenario Execution : The scenario runs automatically when a new response is detected (if active). Alternatively, use Make.com’s “Run Once” button to test manually. Check Email : Verify that an email arrives with: Subject: “Feedback Summary of Jane Smith” Body:
+
+Name: Jane Smith
+
+Feedback: Friendly staff, but the product was overpriced.
+
+The summary of the Feedback text is: Friendly staff but overpriced product.
+
+Conclusion
+
+This Make.com scenario provides an efficient, cost-free solution for summarizing customer feedback and emailing the results. By leveraging Google Forms, Hugging Face’s Inference API, and Gmail, it automates a valuable workflow while staying within free tier constraints. For scalability, monitor usage and consider paid plans if limits are exceeded.

@@ -1,0 +1,71 @@
+DigitalRegIntel: AI-Driven Real-Time Regulatory Monitoring & Compliance Intelligence Platform
+
+Client Background
+
+Client: A leading Legal Tech Firm in the USA Industry Type: Legal Products & Services: Complete Regulatory Monitoring & Insights Platform Organization Size: 200+
+
+The Problem
+
+The client needed a robust and automated solution to track, analyze, and interpret regulatory changes across multiple jurisdictions in real time. Their existing manual process for monitoring compliance updates was inefficient, prone to delays, and lacked centralized visibility. They wanted a scalable digital system that could collect, classify, and deliver regulatory intelligence to decision-makers without human dependency, ensuring data accuracy, timeliness, and compliance adherence.
+
+Our Solution
+
+Our team at Blackcoffer developed a unified Regulatory Monitoring and Insights Platform – DigitalRegIntel , designed to automate the complete regulatory intelligence cycle. The system continuously gathers data from verified regulatory sources, applies Natural Language Processing (NLP) models for categorization and summarization, and provides a visual dashboard with insights for compliance teams.
+
+The platform enables
+
+Real-time regulatory alerts and updates AI-driven classification of regulations by domain, country, and impact Customizable dashboards for quick data visualization Secure multi-user access with role-based permissions API integration for data sharing with client’s internal systems
+
+Solution Architecture
+
+The architecture follows a modular microservices approach ensuring scalability, flexibility, and high performance.
+
+Key Components:
+
+Data Ingestion Layer – Web crawlers and APIs to fetch regulatory data. Data Processing Layer – NLP and ML models for cleaning, summarization, and classification. Application Layer – Node.js-based backend to manage workflows and business logic. Frontend Interface – React.js web application for user interaction and dashboards. Database Layer – Centralized PostgreSQL database for structured storage. Deployment Layer – Deployed on AWS using EC2 and S3, managed via Docker containers and CI/CD pipelines.
+
+Deliverables
+
+Fully functional DigitalRegIntel web platform Data ingestion and processing engine Admin dashboard with analytics and regulatory insights API integration for external data connectivity User access management system Documentation and maintenance support
+
+Tech Stack
+
+Tools used Visual Studio Code Postman AWS Cloud Services (EC2, S3, Lambda) Docker, GitHub, Jenkins (for CI/CD) Language/techniques used Frontend: Next.js, Tailwind Backend: Supabase AI/NLP: Python, NLTK, spaCy, Transformers Models used BERT for text classification TextRank for summarization Custom NER model for regulation entity extraction Skills used Full Stack Development Data Engineering NLP and Machine Learning API Development and Integration Cloud Deployment (AWS) Databases used Supabse (Primary db) Web Cloud Servers used AWS EC2 for hosting backend services AWS S3 for static asset storage CloudFront for content delivery and caching
+
+What are the technical Challenges Faced during Project Execution
+
+Handling diverse data formats from multiple regulatory sources (PDF, HTML, DOCX, RSS).
+
+Ensuring high accuracy in NLP classification across multiple industries and jurisdictions.
+
+Managing large-scale data ingestion while maintaining system performance.
+
+Integrating ML pipelines within the live platform without downtime.
+
+Maintaining data integrity and version control during updates.
+
+How the Technical Challenges were Solved
+
+Implemented data normalization pipelines to unify multiple file formats.
+
+Trained custom fine-tuned BERT models for domain-specific text understanding.
+
+Used asynchronous task queues (Celery + Redis) for large-scale data processing.
+
+Adopted modular microservices to isolate ML models from application logic.
+
+Applied incremental database updates with rollback features for data safety.
+
+Business Impact
+
+85% reduction in manual effort for regulatory data monitoring. 60% faster insights delivery compared to the previous manual process. Real-time monitoring improved decision-making and compliance accuracy. Enhanced transparency and accountability across compliance teams. Scalable solution ready for multi-region regulatory tracking.
+
+Project Snapshots
+
+Project website url
+
+http://digitalregintel.com/
+
+Project Video
+
+https://www.loom.com/share/f8bffef2aca9442fa1af6294cf23d7fb https://www.loom.com/share/d0f9e875dfad414ca61088e5ebbd6e8c https://www.loom.com/share/970131d71ab64fba88d491351d67235d

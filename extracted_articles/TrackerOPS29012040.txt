@@ -1,0 +1,101 @@
+Automation of Call Charge Calculations & Currency Conversion in Airtable
+
+Client Background
+
+Client: A Leading Telecom Billing Automation tech firm in Israel Industry Type: Telecommunications / SaaS Products & Services: Call tracking, SIP trunk management, VoIP billing Organization Size: 500+
+
+The Problem
+
+The client used Airtable for managing SIP trunk call logs and billing but relied heavily on manual Excel calculations for:
+
+Pivot-style data summaries Currency conversions from USD to Israeli Shekel (ILS) Conditional formatting of cost columns
+
+This manual process was time-consuming, error-prone, and not scalable. Additionally, the client needed a dynamic system to handle:
+
+Automatic row-wise pivot-style aggregation Real-time currency conversion Visual distinction of high-cost call columns via color coding
+
+Our Solution
+
+We built an automated billing intelligence layer on top of Airtable, transforming it from a passive database into a dynamic billing dashboard. Our solution included:
+
+Pivot Calculations : Implemented row-wise call charge rollups using Airtable’s calculated columns and formula fields. Currency Conversion : Integrated a live USD → ILS exchange rate fetcher via custom JavaScript block in Airtable, ensuring real-time rate application. Conditional Formatting : Programmatically handled column color styling based on call cost thresholds for easy billing insights.
+
+All Excel-based logic was replaced with automated, in-platform processing , improving performance and accuracy.
+
+Solution Architecture
+
+ Frontend/UI : Airtable base with extended blocks and automation
+
+ Calculation Logic :
+
+Airtable formula columns for pivots JavaScript scripting block for currency and complex calculations
+
+ Currency Conversion : Live rate fetch via REST API inside Airtable script
+
+ Presentation Layer : Airtable views with customized color coding
+
+Deliverables
+
+  Pivot-style summary table of SIP trunk calls with automated row-by-row cost aggregation
+
+  JavaScript-enhanced currency conversion (USD to ILS)
+
+  Airtable-integrated logic for conditional formatting of cost columns
+
+  Elimination of Excel dependency for recurring calculations
+
+Tech Stack
+
+ Tools Used:
+
+Airtable, JavaScript Scripting Block, REST API
+
+ Language/Techniques Used:
+
+JavaScript, Airtable formulas, Currency API integration
+
+ Models Used:
+
+None (no ML/AI models were used)
+
+ Skills Used:
+
+No-code automation, custom scripting, financial calculations, data formatting logic
+
+ Databases Used:
+
+Airtable Base
+
+ Web Cloud Servers Used:
+
+Airtable cloud environment
+
+What are the technical Challenges Faced during Project Execution
+
+  Lack of built-in pivot functionality in Airtable
+
+  Restriction on styling columns directly via Airtable UI
+
+  Absence of native currency conversion or external API call functionality in Airtable formulas
+
+  Managing real-time updates without bloating the scripting block or breaching rate limits
+
+How the Technical Challenges were Solved
+
+  Used Airtable’s row-level formulas to mimic pivot-style aggregations
+
+  Applied JavaScript scripting blocks to fetch live currency rates from a REST API and perform real-time conversions
+
+  Leveraged Airtable’s view customization and logic-based coloring for visual styling
+
+  Optimized scripting for light-weight execution and cache handling to avoid hitting API rate limits
+
+Business Impact
+
+  Eliminated 100% of manual Excel-based effort for weekly and monthly telecom billing
+
+  Enabled real-time visibility into costs and currency impacts across operations
+
+  Increased billing accuracy and speed of reporting
+
+  Empowered non-technical staff to work with a no-code/low-code automated dashboard

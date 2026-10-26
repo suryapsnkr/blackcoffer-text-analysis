@@ -1,0 +1,89 @@
+GraphDB Neo4j Driven SaaS Product
+
+Client Background
+
+Client: A Leading tech product firm in the USA Industry Type: IT Products & Services: Management Solutions Organization Size: 100+
+
+The Problem
+
+The chatbot which was created by client has not been able to answer any question regarding nodes labelled nodes as well as there are some formatting issues also in the response provided by api endpoints, further client also wants the llm to b e able to answer queries on pdf documents which are stored in neo4j and there are other minor and major bugs and issues to be fixed, after that client has requested for a new api endpoint to generate description for projects using user provided draft description, same way client has also requested for another api endpoint this time to enhance email body from provided users draft email body.
+
+Our Solution
+
+–        For node labelled nodes we have identified the issue that causing the problem, then we create a new instance for node labelled nodes and merge them with project labelled nodes.
+
+–        For document queries we first build a setup to extract the data from pdf docs and then convert them into also identify the entities in the doc and relationship between them using gpt-4 and embed and store all this data in neo4j; then for retrieval we retrieve in two forms structure and unstructured to give llm a broder view on the document data.
+
+–        For new api endpoints we try maintain the structure as previous endpoints just setup a new agent and tool with new prompt for desired response, also we created two tools one for general project and other for technical projects.
+
+–        For email body enhancement endpoint we follow the same method as description endpoint just with new agent tool setup and new prompts.
+
+Solution Architecture
+
+The project aimed to improve the already existing chatbot and its answering capabilities and also adding new features to be able to answer on different type of data like pdf document etc, it also include new api endpoints which generate description or enhance email body provided by user.
+
+Deliverables
+
+Github Repo: https://github.com/AjayBidyarthy/Koushik-Srikakolapu-AI-ML-Chatbot
+
+Project document: https://docs.google.com/document/d/1s1u1C42i5ROm_J9CLL8d9ZLiV2Ek-FOkcZGhlktVqyc/edit?usp=drive_link
+
+AI walkthrough document: https://docs.google.com/document/d/1FzbjzD1IZoM9M83P9Brt4xX0-e3lXkDIex4heTjCCQg/edit?usp=drive_link
+
+Tech Stack
+
+· Tools used
+
+·       VS code
+
+·       GCP
+
+·       Swagger ui
+
+·       terminal
+
+· Language/techniques used
+
+·       Python
+
+· Models used
+
+·       GPT-4
+
+·       Gemini 1.5 pro
+
+·       Gemini 2.0 flash
+
+· Skills used
+
+·       Data embedding and retrieving
+
+· Databases used
+
+·       Neo4j
+
+· Web Cloud Servers used
+
+·       GCP
+
+What are the technical Challenges Faced during Project Execution
+
+When  retrieving the data for pdf document its becoming difficult to give accurate and sufficient data to llm for it to answer queries correctly.
+
+How the Technical Challenges were Solved
+
+We stored the data in 2 ways first in chunks and second a knowledge graph, so when retrieving the data we retrieve both type of data which gives llm more standing of the context in document.
+
+Business Impact
+
+Chatbot can give good responses for user queries hence can solve the customers confusions and guide them well for their desired product.
+
+Project Snapshots
+
+Project website url
+
+http://app.productfabrix.com/
+
+Project Video
+
+Project Overview Video: https://www.loom.com/share/2bf35edf59a24a929c96d83dbaa2f902?sid=9154c82a-1f2e-4752-9865-b7a15d97c159

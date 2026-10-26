@@ -1,0 +1,43 @@
+Advanced Log Analytics & Custom Monitoring Dashboards Using Python and Datadog
+
+Client Background
+
+Client: A Leading Tech Firm in the USA
+
+Industry Type: Glass Manufacturing and Building Materials industry
+
+Products & Services: Guardian Glass
+
+Organization Size: 200+
+
+The Problem
+
+Team encountered significant challenges with data visualization while using Grafana for log monitoring. Grafana’s limitations in handling and transforming raw log data restricted our ability to generate clear, real-time insights, which impacted effective system performance tracking and troubleshooting.
+
+Our Solution
+
+To address this issue, we leveraged Python’s Pandas library to preprocess and transform raw log data, enabling flexible cleaning, structuring, and enrichment. We then used Datadog’s API to feed the processed data into the Datadog platform, which allowed us to create customized and dynamic dashboards that better suited our monitoring and analysis needs.
+
+Solution Architecture
+
+Our architecture consists of a log data pipeline where raw logs are extracted and transformed using Pandas for data wrangling. The cleaned and structured data is pushed to Datadog through its API. Datadog then serves as the visualization and monitoring layer, displaying real-time dashboards with tailored metrics, enabling continuous operational oversight.
+
+Deliverables
+
+Datadog dahsboards
+
+Tech Stack
+
+Tools used Datadog Language/techniques used Python Skills used Data analysis
+
+What are the technical Challenges Faced during Project Execution
+
+The primary technical challenge was efficiently transforming large volumes of unstructured log data into a format suitable for visualization, while maintaining performance and data integrity.
+
+How the Technical Challenges were Solved
+
+This was resolved by applying granular data manipulation with Pandas, allowing us to handle complex transformations smoothly. Integrating seamlessly with Datadog’s API ensured reliable data ingestion and visualization refresh.
+
+Business Impact
+
+By improving log data visualization and monitoring, we enhanced our ability to detect and respond to system issues swiftly, reducing downtime and operational risks. The more insightful dashboards empowered teams with better decision-making tools, ultimately increasing system reliability and improving overall business performance.
